@@ -1,0 +1,246 @@
+*{
+    box-sizing: border-box;
+}
+
+body{
+    margin: 0;
+    padding: 0  ;
+}
+
+.row{
+    display: flex;
+    flex-direction: column;   
+}
+
+.col1{
+    display: flex;
+    flex-direction: row;
+    margin-left: 8rem;
+    margin-top: 5rem;
+}
+
+.col1 .box1 h1{
+    font-family: CSemibold;   
+}
+
+.col1 .box1 p{
+    font-family: CRegular;
+}
+
+.col1 .box1 button{
+    height: 2rem;
+    width: 7rem;
+    color: #3293FF;
+    background-color: white;
+    border: 1.33333px solid #3293FF;
+    border-radius: 4px;
+    transition: 0.3s ease-out;
+}
+
+.col1 .box1 button:hover{
+    
+    background-image: linear-gradient(to right, #6780F0,#38B6FF);
+    color: white;
+    cursor: pointer;
+}
+
+.col1 .box1::before{
+    content: '';
+    position: absolute;
+    left: 5rem;
+    margin-top: 2rem;
+    width: 10px;
+    height: 30%;
+    background-image: linear-gradient(to right, #6780F0,#38B6FF);
+}
+
+.col1 a{
+    text-decoration: none;
+}
+
+.col1 .box2{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin-left: 10rem;
+    width: 225px;
+    height: 250px;
+    box-shadow: 4px 4px 10px 5px rgba(0, 0, 0, 0.25);
+    border-radius: 5px;
+}
+
+.col1 .box2 p{
+    margin-top: 2.5rem;
+    font-family: CBold;
+    font-size: 1.25rem;
+    text-align: center;
+    color: #3293FF;
+}
+
+.col1 .box3{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin-left: 10rem;
+    width: 225px;
+    height: 250px;
+    box-shadow: 4px 4px 10px 5px rgba(0, 0, 0, 0.25);
+    border-radius: 5px;
+}
+
+.col1 .box3 p{
+    margin-top: 2.5rem;
+    font-family: CBold;
+    font-size: 1.25rem;
+    text-align: center;
+    color: #3293FF;
+}
+
+.col1 .box2:hover{
+    border: 1.5px solid #3293FF;
+    letter-spacing: 1px;
+}
+
+.col1 .box3:hover{
+    border: 1.5px solid #3293FF;
+    letter-spacing: 1px;
+}
+
+@media(max-width: 1200px){
+    .col1{
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .col1 .box2{
+        margin-top: 2.5rem;
+    }
+
+    .col1 .box3{
+        margin-top: 2.5rem;
+    }
+}
+
+.col2{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 5rem;
+    background-color: #3293FF;
+    width: 100%;
+    border-top-right-radius: 1rem;
+    border-top-left-radius: 1rem ;
+    
+}
+
+.col2 h4{
+    font-size: 3rem;
+    font-family: CBold;
+    color: white;
+    
+}
+
+.col2 h4::before,
+.col2 h4::after{
+    content: 'YOUR DASHBOARD';
+    opacity: 0.1;
+    margin: 5rem;
+}
+
+@media screen and (max-width: 1200px) {
+    .col2 h4::before, .col2 h4::after{
+       content: '';
+       margin: 0;
+    }
+}
+
+
+.content{
+    margin-bottom: 5rem;
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    background-color: white;
+    width: 80%;
+    border-radius: 5px;
+}
+
+.content .filters select{
+    outline: none;
+    height: 35px;
+    width: 100px;
+    margin: 2.5rem;
+    text-align: center;
+    border-radius: 5px;
+    border: 2px solid #207198;
+    color: #207198;
+    font-family: CBold;
+}
+
+.content .filters input{
+    width: 250px;
+    height: 35px;
+    outline: auto;
+    outline-color: #207198;
+    border-radius: 5px;
+    text-align: center;
+    outline-width: 1.43578px;
+    font-size: 16px;
+    border: none;
+}
+
+.content .toprow{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.content .toprow p{
+    font-family: CRegular;
+}
+
+.content .space{
+    margin-left: 5rem;
+}
+
+.content .space2{
+    margin-left: 2.5rem;
+}
+
+.content .data{
+    display: flex;
+    flex-direction: row;
+    margin-left: 1.5rem;
+    margin-right: 1.5px;
+    margin-bottom: 2.5rem;
+    align-items: center;
+    background-color: white;
+    border: 2px solid #38B6FF;
+    border-radius: 10px;
+}
+
+.content .data p{
+    font-family: CRegular;
+}
+
+.content .data #department{
+    max-width: 165px;
+}
+
+.content .data img{
+    height: 30px;
+    width: 30px;
+}
+
+.content .data button{    
+    height: 30px;
+    width: 65px;
+    font-family: CRegular;
+    color: white;
+    background-color: #EE5757;
+    border-radius: 5px;
+    border: none; 
+    box-shadow: 1px 2px 3px rgba(70, 118, 251, 0.41);   
+}
+
+
