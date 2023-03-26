@@ -13,17 +13,17 @@ module.exports = function(con,email, password,res){
             throw err;
         }
         console.log("DB connect");
-        email='iit2021128@iiita.ac.in'
+        console.log(email);
+        // email='iit2021128@iiita.ac.in'
+        // email= toString(email);
         con.query("SELECT * from person where email = (?) ", [email], function(err, result, fields){
             if (err) throw err;
 
-            if(result.length==0){
-                res.render("userlogin");
-
-            }
+            if(result.length>0){
+             
              if(result[0].pass==password){
               res.render("userHome");
-                }
+                }}
                 else{
                     
                   res.render("userlogin");

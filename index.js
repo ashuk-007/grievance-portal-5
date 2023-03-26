@@ -58,6 +58,8 @@ app.post("/signup",(req,res)=>{
  app.post("/userlogin", (req,res)=>{
     var password = req.body.password;
     var email = req.body.email;
+    console.log(email);
+
      ans=logim(con,email, password,res);
 
   
