@@ -2,14 +2,16 @@ var mysql = require("mysql2")
 const express = require("express");
 const path = require("path");
 const app = express();
-const port =5000;
+const port =4000;
 const hbs = require("ejs")
 const alert =  require("alert");
 // const popup = require('popups');
+const inputs = require('./user')
+const loginUse = require('./login')
 var con = mysql.createConnection({
     host : "localhost",
     user : "root",
-   password : "tanish@0601",
+   password : "MySQL@123",
     database  : "gri"
 });
 app.use(express.json());
@@ -31,6 +33,10 @@ app.get("/register",(req,res)=>{
     res.render("register.ejs");
 })
 
+app.get("/userHome", (req,res)=>{
+    res.render("userHome.ejs")
+})
+
 app.post("/signup",(req,res)=>{
 
     var name = req.body.Name;
@@ -40,34 +46,23 @@ app.post("/signup",(req,res)=>{
     var ageNumber= req.body.ageNumber;
     var gender = req.body.gender;
     var email = req.body.email;
-    con.connect(function(err) {
-     if (err) throw err;
-
-   let check =true;
-    //  while(check){
-     let user_id= Math.floor(Math.random() * 100000);
-     let person_id = "user"+user_id;
-     con.query("SELECT count(*) FROM person where person_id=(?)",[person_id] ,function (err, result, fields) {
-                   console.log(result[0]);
-                   console.log("djnckjd");
-         if (err) throw err;
-       else if(result[0]==0){
-            check =false;
-            console.log(check);
-
-        }});
-    // }
-    
-         con.query('INSERT INTO person (person_id, person_name, age, gender,aadhar_no,mobile_no,email,pass) VALUES (?, ?, ?, ?, ?,?,?,?)', [person_id,name,ageNumber, gender,aadharNumber ,mobileNumber,email,password],(error, 
-     results) => {
-         if (error)  throw error;
-         else
-        res.render("userlogin");
-
-         });
-   });
-
+    inputs(con, name, password, aadharNumber, mobileNumber, ageNumber, gender, email)
+    res.render("userlogin");
  });
+
+ app.post("/userlogin", (req,res)=>{
+    var password = req.body.password;
+    var email = req.body.email;
+    console.log("---------------------");
+    var ans = loginUse(email, password);
+    console.log(ans);
+    if(ans==1){
+        res.render("userHome");
+    }
+    else{
+        res.render("userlogin");
+    }
+ })
 
 
 app.listen(port,()=>{
