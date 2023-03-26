@@ -7,11 +7,13 @@ const hbs = require("ejs")
 const alert =  require("alert");
 // const popup = require('popups');
 const inputs = require('./user')
-const loginUse = require('./login')
+const logim = require('./login')
+// const { logim} = require('./login')
+
 var con = mysql.createConnection({
     host : "localhost",
     user : "root",
-   password : "MySQL@123",
+   password : "tanish@0601",
     database  : "gri"
 });
 app.use(express.json());
@@ -56,15 +58,9 @@ app.post("/signup",(req,res)=>{
  app.post("/userlogin", (req,res)=>{
     var password = req.body.password;
     var email = req.body.email;
-    console.log("---------------------");
-    var ans = loginUse(email, password);
-    console.log(ans);
-    if(ans==1){
-        res.render("userHome");
-    }
-    else{
-        res.render("userlogin");
-    }
+     ans=logim(con,email, password,res);
+
+  
  })
 
 

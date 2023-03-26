@@ -11,7 +11,7 @@ module.exports = function (con, name, password, aadharNumber, mobileNumber, ageN
         if (err) throw err;
    
       let check =true;
-       while(check){
+    //    while(check){
         let user_id= Math.floor(Math.random() * 100000);
         let person_id = "user"+user_id;
         con.query("SELECT count(*) as counter FROM person where person_id=(?)",[person_id] ,function (err, result, fields) {
@@ -23,7 +23,7 @@ module.exports = function (con, name, password, aadharNumber, mobileNumber, ageN
                console.log("djnckjd");
    
            }});
-       }
+    //    }
        
             con.query('INSERT INTO person (person_id, person_name, age, gender,aadhar_no,mobile_no,email,pass) VALUES (?, ?, ?, ?, ?,?,?,?)', [person_id,name,ageNumber, gender,aadharNumber ,mobileNumber,email,password],(error, 
         results) => {

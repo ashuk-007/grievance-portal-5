@@ -6,24 +6,30 @@ const port =4000;
 const hbs = require("ejs")
 const alert =  require("alert");
 
-module.export = function(email, password){
-    console.log("ENtered function");
+module.exports = function(con,email, password,res){
     con.connect(function(err){
         if(err) {
             console.log('PROBLEM!!!');
             throw err;
         }
         console.log("DB connect");
-        con.query("SELECT count(*) as counter from person where email = (?) and password = (?)", [email], [password], function(err, result, fields){
-            console.log(result[0].counter);
-            if(err) throw err;
-            else if(result[0].counter==1){
-                console.log("UNIQUE");
-                return 1;
+        email='iit2021128@iiita.ac.in'
+        con.query("SELECT * from person where email = (?) ", [email], function(err, result, fields){
+            if (err) throw err;
+
+            if(result.length==0){
+                res.render("userlogin");
+
             }
-            else{
-                return 0;
+             if(result[0].pass==password){
+              res.render("userHome");
+                }
+                else{
+                    
+                  res.render("userlogin");
+            
             }
+
         })
     });
     con.end();
