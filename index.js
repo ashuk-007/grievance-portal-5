@@ -30,6 +30,9 @@ app.get("/officerlogin",(req,res)=>{
 app.get("/register",(req,res)=>{
     res.render("register.ejs");
 })
+app.get("/userHome",(req,res)=>{
+    res.render("userHome.ejs");
+})
 
 app.post("/signup",(req,res)=>{
 
