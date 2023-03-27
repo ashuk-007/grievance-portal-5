@@ -8,6 +8,8 @@ const alert =  require("alert");
 // const popup = require('popups');
 const inputs = require('./user')
 const logim = require('./login')
+const officerlogim = require('./officerlogin')
+
 // const { logim} = require('./login')
 
 var con = mysql.createConnection({
@@ -29,7 +31,7 @@ app.get("/userLogin",(req,res)=>{
 })
 
 app.get("/officerlogin",(req,res)=>{
-    res.render("userLogin.ejs");
+    res.render("officerLogin.ejs");
 })
 app.get("/register",(req,res)=>{
     res.render("register.ejs");
@@ -65,7 +67,19 @@ app.post("/signup",(req,res)=>{
   
  })
 
+ 
+
+ app.post("/officerlogin", (req,res)=>{
+    var password = req.body.password;
+    var email = req.body.email;
+        console.log(email);
+     ans=officerlogim(con,email, password,res);
+
+  
+ })
+
 
 app.listen(port,()=>{
+
     console.log(`successfully port connected`);
 })

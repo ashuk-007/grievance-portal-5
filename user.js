@@ -30,5 +30,4 @@ module.exports = function (con, name, password, aadharNumber, mobileNumber, ageN
             if (error)  throw error;
             });
       });
-      con.end();
 }
