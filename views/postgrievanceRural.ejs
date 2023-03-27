@@ -9,17 +9,6 @@
     <script src="../static/scripts/navbar.js" defer></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script>
-      function handleArea(){
-        console.log("handle area");
-        var e = document.getElementById("area");
-        var value = e.value;
-        console.log(value);      
-        if(value == "urban"){
-          document.location.assign("postgrievanceUrban");
-        }
-      }
-    </script>
   </head>
   <body>
     <img src="../static/images/bgvector2.png" id="bgimg">
@@ -42,22 +31,21 @@
       </div>
   </nav>
   <div class="container">
-    <div class="title">Post a grievance</div>
+    <div class="title1">Post a grievance</div>
     <div class="space"></div>
     <form action="#">
       <div class="input-box">
         <div class="col1">
-          <div class="title">Application Details</div>
+          <!-- <div class="title">Application Details</div>
           <div class="space"></div>
           <h4>First Name</h4>
           <input type="text" name="firstName" placeholder="Enter First Name" required>
           <div class="space"></div>
           <h4>Aadhar Number</h4>
-          <input type="number" name="aadhar" placeholder="Enter Aadhar Number" required>
-          <div class="space">
-          <h4>Email</h4>
-          <input type="email" name="email" placeholder="Enter Your Email" required>
-          <div class="space"></div>
+          <input type="number" name="aadhar" placeholder="Enter Aadhar Number" required> -->
+          <!-- <h4>Email</h4>
+          <input type="email" name="email" placeholder="Enter Your Email" required> -->
+          <!-- <div class="space"></div> -->
           <div class="title">Complain Details</div>
           <div class="space"></div>
           <h4>Department</h4>
@@ -66,16 +54,13 @@
           <h4>Application Details</h4>
           <input type="text" name="details" id="details">
           <div class="space"></div>
-          <h4>Upload Files</h4>
-          <input type="text" name="upload" placeholder="Upload Files" required>
+          <h4>Upload Images</h4>
+          <div class="space"></div>
+          <h4>Upload Document</h4>
+          <div class="space"></div>
+          <!-- <input type="file" name="upload" id="upload" placeholder="Upload Files" required> -->
           <div class="space"></div>
           <div class="title">Address Details</div>
-          <div class="space"></div>
-          <h4>Area</h4>
-          <select id="area" onchange="handleArea()">
-            <option value="rural">Rural</option>
-            <option value="urban">Urban</option>
-          </select>
           <div class="space"></div>
           <h4>State</h4>
           <input type="text" name="state" placeholder="Select State" required>
@@ -83,13 +68,13 @@
           <h4>Tehsil</h4>
           <input type="text" name="tehsil" placeholder="Select Tehsil" required>
           <div class="space"></div>
-          <h4>Village Panchayat</h4>
-          <input type="text" name="panchayat" placeholder="Village Panchayat" required>
+          <h4 id="address">Address</h4>
+          <input type="text" name="panchayat" placeholder="Enter Address" required>
           </div>
-        </div>
+        
         <div class="col2">
           <div class="space"></div>
-          <h4>Last Name</h4>
+          <!-- <h4>Last Name</h4>
           <input type="text" name="lastName" placeholder="Enter Last Name" required>
           <div class="innerRow">
             <div class="innercol1">
@@ -108,10 +93,14 @@
           <div class="space"></div>
           <h4>Mobile Number</h4>
           <input type="number" name="mobile" placeholder="Enter Mobile Number" required>
-          <div class="bigspace"></div>
+          <div class="bigspace"></div> -->
           <h4>Grievance Category</h4>
           <input type="text" name="grievanceCategory" placeholder="Select Grievance Category" required>
-          <div class="largespace"></div>
+          <div class="bigspace2"><br><br><br></div>
+          <input type="file" name="uploadImage" id="upload1" placeholder="Upload Files" required>
+          
+          <input type="file" name="uploadImage" id="upload2" placeholder="Upload Files" required>
+          <div class="space"><br></div>
           <h4>District</h4>
           <input type="text" name="district" placeholder="Select District" required>
           <div class="space"></div>

@@ -60,7 +60,8 @@ body{
     margin-top: 5rem;
     background-color: #3293FF;
     width: 100%;
-    border-radius: 1rem;
+    border-top-right-radius: 1rem;
+    border-top-left-radius: 1rem ;
     
 }
 
@@ -81,14 +82,10 @@ body{
 @media screen and (max-width: 1200px) {
     .col2 h4::before, .col2 h4::after{
        content: '';
+       margin: 0;
     }
 }
 
-@media screen and (max-width: 1600px){
-    #path{
-        display: none;
-    }
-}
 
 .col2 p{
     margin-top: -2.5rem;
@@ -138,8 +135,59 @@ width: 882.87px;
 height: 873.19px;
 left: 25rem;
 top: 55rem;
-
-
 }
 
+.col2 .header{
+    background-color: white;
+    width: 65%;
+    height: 10rem;
+    margin-bottom: -5rem;
+    border-radius: 10px;
+}
 
+.col2 .header p{
+    text-align: center;
+    font-family: CSemibold;
+    font-size: 2rem;
+    margin-top: 1.5rem;
+    color: black;
+}
+
+.col3{
+    margin-top: 3rem;
+    margin-left: 15rem;
+    margin-right: 15rem;
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.col3 .cards{
+    height: 160px;
+    width: 240px;   
+    background-color: #38B6FF;
+    filter: drop-shadow(4px 4px 4px rgba(0, 0, 0, 0.25));
+    margin-bottom: 5rem;
+}
+
+.col3 .cards p{
+    font-family: CSemibold;
+    color: white;
+    text-align: center;
+    font-size: 1.25rem;
+}
+
+.col3 .cards h4{
+    margin-top: .25rem;
+    font-family: CBold;
+    color: white;
+    text-align: center;
+    font-size: 2.5rem;
+}
+
+@media (max-width: 1300px){
+    .col3{
+        flex-direction: column;
+    }
+}

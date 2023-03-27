@@ -9,7 +9,7 @@
     <script src="../static/scripts/navbar.js" defer></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    </script>
+    <script src="../static/scripts/statusbar.js" defer></script>
   </head>
   <body>
     <img src="../static/images/bgvector2.png" id="bgimg">
@@ -32,7 +32,7 @@
       </div>
   </nav>
   <div class="container">
-    <div class="title">Grievance Status</div>
+    <div class="title1">Grievance Status</div>
         <div class="input-box">
             <div class="col1">
                 <div class="title">Complain Details</div>
@@ -40,16 +40,18 @@
                 <h4>Grievance number:</h4>
                 <div class="space2"></div>
                 <h4>Status:</h4>
-                <div class="space2"></div>
+                <div class="space2"></div><br>
+                <div class="bigspace"></div><br>
                 <h4>Department:</h4>
                 <div class="space2"></div>
                 <h4>Grievance Category:</h4>
                 <div class="space2"></div>
                 <h4>Application Details:</h4>
                 <div class="space2"></div>
-                <div class="field">Application Details</div>
+                <div class="field" id="widefield">Application Details</div>
                 <div class="space3"></div>
-                <h4>View Uploaded Files:</h4>
+                <!-- <div class="space3"></div>
+                <h4>View Uploaded Files:</h4> -->
                 <div class="space2"></div>
                 <h4>Concerned Officer:</h4>
                 <div class="space2"></div>
@@ -59,17 +61,33 @@
                 <div class="bigspace"></div>
                 <div class="field">Grievance number.</div>
                 <div class="space"></div>
-                <div class="field">Grievance number.</div>
+                <div class="statusbar">
+                    <div class="statusbarcontainer">
+                        <div id="statusbarbg"></div>
+                        <div class="circle1"></div>
+                        <div class="circle2"></div>
+                        <div class="circle3"></div>
+                    </div>                    
+                    <div class="status">
+                        <div class="field1">Unseen</div>
+                        <div class="space"></div>
+                        <div class="field2">In-Progress</div>
+                        <div class="space"></div>
+                        <div class="field3">Solved</div>
+                    </div>
+                </div>
+                <div class="space"></div>
                 <div class="space"></div>
                 <div class="field">Grievance number.</div>
                 <div class="space"></div>
                 <div class="field">Grievance number.</div>
-                <div class="bigspace"></div><br><div class="bigspace"></div><br>
+                <div class="bigspace"></div><br><div class="space"></div><br><br><br><br><br>
+                <!-- <div class="field">Grievance number.</div>
+                <div class="space"></div> -->
                 <div class="field">Grievance number.</div>
                 <div class="space"></div>
                 <div class="field">Grievance number.</div>
-                <div class="space"></div>
-                <div class="field">Grievance number.</div>
+                
             </div>
         </div>
   </div>

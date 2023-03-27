@@ -30,7 +30,7 @@ html, body{
 .container{
   display: flex;
   flex-direction: column;
-  height: 1500px;
+  height: 1150px;
   max-width: 1000px;
   width: 100%;
   padding: 25px 30px;
@@ -64,6 +64,15 @@ html, body{
     width: 100%;
 }
 
+.container .title1{
+  color: #0E4A67;
+  font-family: SSBold;
+  font-size: 60px;
+  font-weight: 600;
+  margin: 20px 0 10px 0;
+  position: relative;
+}
+
 .container form .title{
     color: #0E4A67;
     font-family: SSBold;
@@ -78,6 +87,17 @@ html, body{
   position: absolute;
   height: 4px;
   width: 33px;
+  left: 0px;
+  bottom: -5px;
+  border-radius: 5px;
+  background-image: linear-gradient(to right, #6780F0,#38B6FF);
+}
+
+.container .title1:before{
+  content: '';
+  position: absolute;
+  height: 10px;
+  width: 50px;
   left: 0px;
   bottom: -5px;
   border-radius: 5px;
@@ -151,25 +171,167 @@ html, body{
 
 
 .container .input-box .field{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  
-  width: 300%;
+  width: 210%;
   height: 45px;
-  outline: auto;
-  outline-color: #207198;
-  border-radius: 5px;
+  
+  background-color: white;
+  border-bottom: 2px solid #207198;
   text-align: center;
-  outline-width: 1.43578px;
   font-size: 16px;
+  padding: 12px;
+}
+
+.container .input-box .col2 .statusbar .status .field1.active{
+  border-radius: 5px;
+  background-image: linear-gradient(to right, #6780F0,#38B6FF);
+  outline: none;
   border: none;
+  color: white;
+}
+
+.container .input-box .col2 .statusbar .status .field2.active{
+  border-radius: 5px;
+  background-image: linear-gradient(to right, #6780F0,#38B6FF);
+  outline: none;
+  border: none;
+  color: white;
+}
+
+.container .input-box .col2 .statusbar .status .field3.active{
+  border-radius: 5px;
+  background-image: linear-gradient(to right, #6780F0,#38B6FF);
+  outline: none;
+  border: none;
+  color: white;
+}
+
+.container #widefield{
+  width: 340%;
 }
 
 .container .input-box .col2{
     margin-top: 2.5rem;
     margin-left: 10rem;
 }
+
+.container .input-box .col2 .statusbar{
+  display: flex;
+  flex-direction: row;
+}
+
+.container .input-box .col2 .statusbar .statusbarcontainer{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 10px;
+  height: 210px;
+  margin-right: 2.5rem;
+  background-color: #777;
+  /* border: 1.5px solid #777; */
+  border-radius: 10px;
+}
+
+.container .input-box .col2 .statusbar .statusbarcontainer .circle1{
+  position: absolute;
+  height: 30px;
+  width: 30px;
+  margin-top: 1rem;
+  border-radius: 50%;
+  background-color: #777;
+}
+
+.container .input-box .col2 .statusbar .statusbarcontainer .circle1.animateCircle{
+  background-color: #6780F0;
+  transition: all 0.75s ease;
+}
+
+.container .input-box .col2 .statusbar .statusbarcontainer .circle2.animateCircle{
+  background-color: #6780F0;
+  transition: all 1.25s ease;
+}
+
+.container .input-box .col2 .statusbar .statusbarcontainer .circle3.animateCircle{
+  background-color: #6780F0;
+  transition: all 2s ease;
+}
+
+.container .input-box .col2 .statusbar .statusbarcontainer .circle2{
+  position: absolute;
+  height: 30px;
+  width: 30px;
+  margin-top: 5.5rem;
+  border-radius: 50%;
+  background-color: #777;
+}
+
+.container .input-box .col2 .statusbar .statusbarcontainer .circle3{
+  position: absolute;
+  height: 30px;
+  width: 30px;
+  margin-top: 10rem;
+  border-radius: 50%;
+  background-color: #777;
+}
+
+.container .input-box .col2 .statusbar .statusbarcontainer #statusbarbg{
+  border-radius: 10px;
+  width: 100%;
+  height: 55%;
+  background-color: #6780F0;
+  transform: scaleY(0);
+  transform-origin: top;
+  transition: all 2s ease;
+}
+
+.container .input-box .col2 .statusbar .statusbarcontainer #statusbarbg.animate{
+  transform: scaleY(1);
+}
+
+.container .input-box .col2 .statusbar .status .field1{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  
+  width: 250%;
+  height: 45px;
+  background-color: white;
+  border-bottom: 2px solid #207198;
+  text-align: center;
+  outline-width: 1.43578px;
+  font-size: 16px;
+  padding: 12px;
+}
+
+.container .input-box .col2 .statusbar .status .field2{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  
+  width: 250%;
+  height: 45px;
+  background-color: white;
+  border-bottom: 2px solid #207198;
+  text-align: center;
+  outline-width: 1.43578px;
+  font-size: 16px;
+  padding: 12px;
+}
+
+.container .input-box .col2 .statusbar .status .field3{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  
+  width: 250%;
+  height: 45px;
+  background-color: white;
+  border-bottom: 2px solid #207198;
+  text-align: center;
+  outline-width: 1.43578px;
+  font-size: 16px;
+  padding: 12px;
+}
+
 
 .container .space{
   margin: 35px 0 20px 0;
