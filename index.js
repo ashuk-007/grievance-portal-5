@@ -15,7 +15,7 @@ const officerlogim = require('./officerlogin')
 var con = mysql.createConnection({
     host : "localhost",
     user : "root",
-   password : "India@no.1",
+   password : "tanish@0601",
     database  : "gri"
 });
 app.use(express.json());
@@ -83,7 +83,7 @@ app.post("/register",(req,res)=>{
 
  app.post("/officerlogin", (req,res)=>{
     var password = req.body.password;
-    var email = req.body.email;
+    var email = req.body.Email;
         console.log(email);
      ans=officerlogim(con,email, password,res);
 
