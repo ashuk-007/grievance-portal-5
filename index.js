@@ -9,6 +9,8 @@ const alert =  require("alert");
 const inputs = require('./user')
 const logim = require('./login')
 const officerlogim = require('./officerlogin')
+const complaint = require('./complaint')
+
 
 // const { logim} = require('./login')
 
@@ -45,7 +47,8 @@ app.get("/userHome", (req,res)=>{
 })
 
 app.get("/postgrievanceRural", (req,res)=>{
-    res.render("postgrievanceRural.ejs")
+    complaint.getDept(con, res);
+    // res.render("postgrievanceRural.ejs")
 })
 
 app.get("/trackgrievance", (req,res)=>{
@@ -55,6 +58,7 @@ app.get("/trackgrievance", (req,res)=>{
 app.get("/index",(req,res)=>{
     res.render("index.ejs");
 })
+
 
 app.post("/register",(req,res)=>{
 
@@ -79,7 +83,7 @@ app.post("/register",(req,res)=>{
   
  })
 
- 
+
 
  app.post("/officerlogin", (req,res)=>{
     var password = req.body.password;
