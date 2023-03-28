@@ -15,7 +15,7 @@ const officerlogim = require('./officerlogin')
 var con = mysql.createConnection({
     host : "localhost",
     user : "root",
-   password : "tanish@0601",
+   password : "MySQL@123",
     database  : "gri"
 });
 app.use(express.json());
