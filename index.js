@@ -44,7 +44,19 @@ app.get("/userHome", (req,res)=>{
     res.render("userHome.ejs")
 })
 
-app.post("/signup",(req,res)=>{
+app.get("/postgrievanceRural", (req,res)=>{
+    res.render("postgrievanceRural.ejs")
+})
+
+app.get("/trackgrievance", (req,res)=>{
+    res.render("trackgrievance.ejs")
+})
+
+app.get("/index",(req,res)=>{
+    res.render("index.ejs");
+})
+
+app.post("/register",(req,res)=>{
 
     var name = req.body.Name;
     var password = req.body.password;

@@ -43,24 +43,23 @@
   </nav>
   <div class="row">
     <div class="container">
-      <form action="signup" method= "post"    onsubmit="checkPassword()">
+      <form method="post" onsubmit="checkPassword()">
         <div class="title"> Create Your Account</div>
         <h4>Already have accont?<a href="userLogin"> Login now</a></h4>
         <div class="input-box">
-          <h4> Name</h4>
+          <h4>First Name</h4>
           <input type="text" name="Name" placeholder="Enter Your First Name" required>
           <div class="space"></div>
-          
           <h4>Aadhar Number</h4>
-          <input type="text" name="aadharNumber" placeholder="Enter Your Aadhar Number" required>
+          <input type="number" name="aadharNumber" placeholder="Enter Your Aadhar Number" required>
           <div class="space"></div>
           <h4>Mobile number</h4>
-          <input type="text" name="mobileNumber" placeholder="Enter Your Aadhar Number" required>
+          <input type="number" name="mobileNumber" placeholder="Enter Your Mobile Number" required>
           <div class="space"></div>
           <div class="rowRegister">
             <div class="col1Register">
                 <h4>Age</h4>
-                <input type="text" name="ageNumber" placeholder="Enter Your Age" required>
+                <input type="number" name="ageNumber" placeholder="Enter Your Age" required>
             </div>
             <div class="col2Register">
                 <h4>Gender</h4>

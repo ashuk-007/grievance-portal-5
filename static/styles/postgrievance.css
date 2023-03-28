@@ -30,7 +30,7 @@ html, body{
 .container{
   display: flex;
   flex-direction: column;
-  height: 1500px;
+  height: 1100px;
   max-width: 1000px;
   width: 100%;
   padding: 25px 30px;
@@ -38,6 +38,26 @@ html, body{
   margin-top: 2rem;
   border-radius: 5px;
     
+}
+
+.container .title1{
+  color: #0E4A67;
+  font-family: SSBold;
+  font-size: 60px;
+  font-weight: 600;
+  margin: 20px 0 10px 0;
+  position: relative;
+}
+
+.container .title1:before{
+  content: '';
+  position: absolute;
+  height: 10px;
+  width: 50px;
+  left: 0px;
+  bottom: -5px;
+  border-radius: 5px;
+  background-image: linear-gradient(to right, #6780F0,#38B6FF);
 }
 
 .container .title{
@@ -176,11 +196,21 @@ html, body{
 
 .container form .input-box #details{
     width: 320%;
-    text-align: left;
-    border-radius: 0;
-    outline: none;
-    border-bottom: 2px solid #207198;
+    height: 90px;
+  outline: auto;
+  outline-color: #207198;
+  border-radius: 5px;
+  padding: 5px;
+  text-align: left;
+  outline-width: 1.43578px;
+  font-size: 16px;
+  border: none;
 }
+
+.container form .input-box input[type = "file"]{
+  margin-top: 0;
+}
+
 
 .container form .input-box input:empty{
   outline-color: #207198;
@@ -198,12 +228,26 @@ html, body{
   transition: all 0.3s ease;
 }
 
+.container form .input-box #upload1:not(:focus):not(:placeholder-shown):invalid{
+  outline: none;
+  border: none;
+}
+
+.container form .input-box #upload2:not(:focus):not(:placeholder-shown):invalid{
+  outline: none;
+  border: none;
+}
+
 .container .space{
   margin: 30px 0 20px 0;
 }
 
 .container .bigspace{
     margin: 98px 0 20px 0;
+}
+
+.container .bigspace2{
+  margin: 102px 0 20px 0;
 }
 
 .container .largespace{
