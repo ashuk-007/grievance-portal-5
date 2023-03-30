@@ -22,6 +22,7 @@ function check(){
         a.style.height = "50%";
         c.classList.add('active');
         a.classList.add('animate');
+        b.innerHTML = "Seen";
         c1.classList.add('animateCircle');
         c2.classList.add('animateCircle');
     }else if(x == "Solved"){
@@ -29,6 +30,7 @@ function check(){
         a.style.height = "100%";
         d.classList.add('active');
         a.classList.add('animate');
+        b.innerHTML = "Seen";
         c1.classList.add('animateCircle');
         c2.classList.add('animateCircle');
         c3.classList.add('animateCircle');

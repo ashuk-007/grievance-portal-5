@@ -17,7 +17,7 @@ const complaint = require('./complaint')
 var con = mysql.createConnection({
     host : "localhost",
     user : "root",
-   password : "MySQL@123",
+   password : "India@no.1",
     database  : "gri"
 });
 app.use(express.json());

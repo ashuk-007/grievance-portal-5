@@ -223,7 +223,7 @@ html, body{
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 10px;
+  width: 5px;
   height: 210px;
   margin-right: 2.5rem;
   background-color: #777;
