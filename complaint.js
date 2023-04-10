@@ -6,8 +6,13 @@ const port =4000;
 const hbs = require("ejs")
 const alert =  require("alert");
 const { response } = require("express");
-
-function getDept(con, res){
+var con = mysql.createConnection({
+    host : "localhost",
+    user : "root",
+   password : "tanish@0601",
+    database  : "gri"
+});
+function getDept(){
     con.connect(function(err){
         if(err){
             console.log("PROBLEM");
@@ -15,9 +20,9 @@ function getDept(con, res){
         }
         con.query("SELECT * from department", function(err, result, fields){
             if(err) throw err;
-            res.render("postgrievanceRural.ejs",{result});
+            console.log(result);
+            // res.render("postgrievanceRural.ejs",{result});
         })
     })
 }
 
-module.exports = {getDept};

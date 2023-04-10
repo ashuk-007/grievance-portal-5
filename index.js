@@ -17,7 +17,7 @@ const complaint = require('./complaint')
 var con = mysql.createConnection({
     host : "localhost",
     user : "root",
-   password : "India@no.1",
+   password : "tanish@0601",
     database  : "gri"
 });
 app.use(express.json());
@@ -47,8 +47,25 @@ app.get("/userHome", (req,res)=>{
 })
 
 app.get("/postgrievanceRural", (req,res)=>{
-    complaint.getDept(con, res);
-    // res.render("postgrievanceRural.ejs")
+
+let re ;
+    con.connect(function(err){
+                if(err){
+                    console.log("PROBLEM");
+                    throw err;
+                }
+                con.query("SELECT * from department", function(err, result, fields){
+                    if(err) throw err;
+                    // console.log(result);
+                    re=result
+                    res.render("postgrievanceRural.ejs",{result});
+                })
+            })
+
+    //         console.log(re);
+    // res.render("postgrievanceRural.ejs",{re});
+    
+
 })
 
 app.get("/trackgrievance", (req,res)=>{
