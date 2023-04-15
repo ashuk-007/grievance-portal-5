@@ -10,7 +10,7 @@ const inputs = require('./user')
 const logim = require('./login')
 const officerlogim = require('./officerlogin')
 const complaint = require('./complaint')
-
+var offemail;
 
 // const { logim} = require('./login')
 
@@ -58,7 +58,8 @@ let re ;
                     if(err) throw err;
                     // console.log(result);
                     re=result
-                    res.render("postgrievanceRural.ejs",{result});
+                    var users = "fdnnvvdmvk"
+                    res.render("postgrievanceRural.ejs",{result,users});
                 })
             })
 
@@ -104,12 +105,83 @@ app.post("/register",(req,res)=>{
 
  app.post("/officerlogin", (req,res)=>{
     var password = req.body.password;
-    var email = req.body.Email;
-        console.log(email);
-     ans=officerlogim(con,email, password,res);
+     offemail = req.body.Email;
+        console.log(offemail);
+     ans=officerlogim(con,offemail, password,res);
+
 
   
  })
+ 
+
+ app.post("/show_complain", (req,res)=>{
+    var com_id= req.body.com_id;
+        console.log(com_id);
+   var one=1;
+        con.query("update table track set seen=(?) where com_id=(?)", [one,com_id], function(err, result, fields){
+            con.query("select * from complaint where com_id=(?)", [com_id], function(err, result1, fields){
+            
+                res.render("offshow_complain",{result1});
+    
+            });
+            
+
+        });
+
+
+  
+ })
+ app.post("/working_on_it", (req,res)=>{
+    var com_id= req.body.com_id;
+        console.log(com_id);
+   var one=1;
+        con.query("update table track set progress=(?) where com_id=(?)", [one,com_id], function(err, result, fields){
+         
+            
+          res.render("officerHome");
+        });
+
+
+  
+ })
+ app.post("/solved", (req,res)=>{
+    var com_id= req.body.com_id;
+        console.log(com_id);
+   var one=1;
+        con.query("update table track set solved=(?) where com_id=(?)", [one,com_id], function(err, result, fields){
+
+          res.render("officerHome");
+        });
+
+
+  
+ })
+ app.post("/transfer", (req,res)=>{
+    var com_id= req.body.com_id;
+    
+res.render("transfer.ejs",{com_id});
+
+  
+ })
+ app.post("/transfer_confirm", (req,res)=>{
+    var com_id= req.body.com_id;
+
+//****** first find the officer_id of officer and then update in complain assignment*/
+
+    // con.query("update table complain_assignment solved=(?) where com_id=(?)", [one,com_id], function(err, result, fields){
+
+    //     res.render("officerHome");
+    //   });
+
+
+  
+ })
+ app.post("/send_to_higher authority", (req,res)=>{
+// from officer id you can find his level as well as his higher officer_id;
+ // now do same as tranfer_confirm
+  
+ })
+
 
 
 app.listen(port,()=>{
