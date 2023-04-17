@@ -1,4 +1,4 @@
-// officer dashboard;
+<!-- // officer dashboard;
 // in Complain dashboard there is button called 'view' and  variable com_id , by clicking this view button of particular complain the value of 
 // com_id = complain_id of this complain.
 // also all the complain are inside a form so by clicking any view button form will submit with action = "show_complain"
@@ -7,4 +7,95 @@
 // when officer clicked on transfer button there is opening of new page(transfer.ejs) in which he have to fill other deppt_name(if you want to keep it short)
 // otherwise you can ask the details as mentioned in complain register form;
 // for now let you asking for all the details of officer,now the form has action called "transfer_confirm"
-// 
+//  -->
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="..\static\styles\navbar.css">
+        <link rel = "stylesheet" href="..\static/styles/officerHome.css">
+        <script src="../static/scripts/navbar.js" defer></script>
+        <script src="../static/scripts/officerHome.js"></script>
+        <title>Grievance Portal</title>
+    </head>
+
+    <body>
+        <nav class="navbar">
+            <div class="logo">
+                <img src="..\static/images/Logo2.png">
+                <p1>Grievance &nbsp</p1> <p2>Portal</p2>
+            </div>
+            <a href="#" class="toggle">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </a>
+            <div class="navbar-links">
+                <ul>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Support</a></li>
+                    <li><a href="#">Profile</a></li>
+                </ul>
+            </div>
+        </nav>
+        <!-- <div class="row">
+            <div class="col1">
+                <div class="box1">
+                    <H1>Solutions To All Your Grievances <br> In One Place.</H1>
+                    <p>We will take your grievance to the desk of concerned officer and see it resolved.</p>
+                    <button type="button" class="learnMore">Learn More</button>
+                </div>
+                <a href="postgrievanceRural"><div class="box2">
+                    <p>Post a new Grievance</p>
+                    <img src="../static/images/addGrievance.png">
+                </div></a>
+                <a href="trackgrievance"><div class="box3">
+                    <p>Track Grievance</p>
+                    <img src="../static/images/trackGrievance.png">
+                </div></a>
+            </div> -->
+            <div class="col2">
+                <h4>YOUR DASHBOARD</h4>
+                <div class="content">
+                    <div class="filters">
+                        <select>
+                            <option value="status">Status</option>
+                            <option value="pending">Pending</option>
+                            <option value="solved">Solved</option>
+                        </select>
+                        <input type="text" name="search" placeholder="Search">
+                    </div>
+                    <table class="table">
+                        <tr class="toprow">
+                            <td width="22%"><p>Grievance Number</p></td>
+                            <td width="20%"><p>Date Registered</p></td>
+                            <td width="33%"><p>Department Name</p></td>
+                            <td width="10%"><p>Status</p></td>
+                            <td width="15%"><p>View</p></td>
+                        </tr>
+                        <form action="show_complain" method="post">
+                        <input type="text" name="com_id" id="invis">
+                        <tr class="data" id="1">
+                            <td width="18%"><p class="greivanceNumber">1</p></td>
+                            <td width="27%"><p id="dateRegistered">DD-MM-YYYY</p></td>
+                            <td width="28%"><p id="department">Department of Something</p></td>
+                            <td width="16%"><button type="button" id="status">Pending</button></td>
+                            <td width="16%"><input type="submit" id="view" value="View" onclick ="update(this.parentNode.parentNode)"></td>
+                        </tr>
+                        <tr class="data" id="2">
+                            <td width="18%"><p class="greivanceNumber">2</p></td>
+                            <td width="27%"><p id="dateRegistered">DD-MM-YYYY</p></td>
+                            <td width="28%"><p id="department">Department of Something</p></td>
+                            <td width="16%"><button type="button" id="status">Pending</button></td>
+                            <td width="16%"><input type="submit" id="view" value="View" onclick ="update(this.parentNode.parentNode)"></td>
+                        </tr>
+                        </form>
+                        </table>        
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
