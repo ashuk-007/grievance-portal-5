@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8">
+    
+    <link rel="stylesheet" href="../static/styles/viewcomplain.css"> 
+    <link rel="stylesheet" href="../static/styles/navbar.css">
+    <script src="../static/scripts/navbar.js" defer></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../static/scripts/view.js" defer></script>
+  </head>
+  <body>
+    <img src="../static/images/bgvector2.png" id="bgimg">
+    <nav class="navbar">
+      <div class="logo">
+          <img src="../static/images/Logo2.png">
+          <p1>Grievance &nbsp</p1> <p2>Portal</p2>
+      </div>
+      <a href="#" class="toggle">
+          <span class="bar"></span>
+          <span class="bar"></span>
+          <span class="bar"></span>
+      </a>
+      <div class="navbar-links">
+          <ul>
+              <li><a href="#">About Us</a></li>
+              <li><a href="#">Support</a></li>
+              <li><a href="#">Profile</a></li>
+          </ul>
+      </div>
+  </nav>
+  <div class="container">
+    <div id="left">
+        <div class="title1">Grievance Status</div>
+        <div class="input-box">
+            <div class="col1">
+                <div class="title">Complain Details</div>
+                <div class="bigspace"></div>
+                <h4>Grievance number:</h4>
+                <div class="space2"></div>
+                <h4>Department ID:</h4>
+                <div class="space2"></div>
+                <h4>Application Details:</h4>
+                <div class="space2"></div>
+                <div class="field" id="widefield"><%= result1[0].complaint_description%></div>
+                <div class="space3"></div>
+                <div class="space3"></div>
+                <h4>View Uploaded Files:</h4>
+                <div class="space2"></div>
+                <h4>Time left:</h4>
+            </div>
+            <div class="col2">
+                <div class="bigspace"></div>
+                <div class="field" id="data"><%= result1[0].com_id%></div>
+                <div class="space"></div>
+                
+                <div class="field"><%= result1[0].department_id%></div>
+                <div class="bigspace"></div><br><div class="space"></div><br><br><br><br><br>
+                <!-- <div class="field">Grievance number.</div>
+                <div class="space"></div> -->
+                <div class="field">Grievance number.</div>
+                <div class="space"></div>
+                <div class="field">Grievance number.</div>    
+            </div>
+        </div>
+    </div>
+    <div id="right">
+        <div class="title1">Action</div>
+        <div class="space"></div>
+        <form action="working_on_it" method="post">
+            <input type="text" name="com_id" class="invis">
+            <input type="submit" name="working_on_it" id="register" value="Working On It">
+        </form>
+        <div class="space"></div>
+        <form action="solved" method="post">
+            <input type="text" name="com_id" class="invis">
+            <input type="submit" name="solved" id="register" value="Solved">
+        </form>
+        <div class="space"></div>
+        <form action="transfer" method="post">
+            <input type="text" name="com_id" class="invis">
+            <input type="submit" name="transfer" id="register" value="Transfer to another department">
+        </form>
+        <div class="space"></div>
+        <form action="send_to_higher" method="post">
+            <input type="text" name="com_id" class="invis">
+            <input type="submit" name="send_to_higher" id="register" value="Send to Higher authority">
+        </form>
+    </div>
+  </div>
+  </body>
+</html>
+
