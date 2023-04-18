@@ -21,7 +21,7 @@ let date_time = new Date();
 var con = mysql.createConnection({
     host : "localhost",
     user : "root",
-   password : "tanish@0601",
+   password : "India@no.1",
     database  : "gri"
 });
 app.use(express.json());
@@ -267,21 +267,35 @@ app.post("/addGrievance",async (req,res)=>{
 
   
  })
- app.get("/transfer",(req,res)=>{
-    var com_id= req.body.com_id;
 
-    res.render("transfer.ejs",{com_id});
+ app.get("/transfer",(req,res)=>{
+    res.render("transfer.ejs");
+ })
+
+ app.post("/transfer",(req,res)=>{
+    var com_id= req.body.com_id;
+    var lvl = req.body.level;
+    con.query("select * from department ", function(err, result, fields){
+        if(err) throw err;
+        console.log(result);
+        console.log(lvl);
+        res.render("transfer",{com_id, lvl,result});
+    })
+    
 })
+
  app.post("/transfer_confirm", (req,res)=>{
     var com_id= req.body.com_id;
     var block_id = req.body.block_id;
-    var department = req.body.department;
+    //var department = req.body.department;
+    var department = "Water";
     var level = req.body.level;
-    con.query('SELECT officer_id FROM officer where block_id = (?) AND department = (?) AND lvl = (?)',[block_id, department, level], (error, result) =>{
+    con.query('SELECT officer_id FROM officer where block_id = (?) AND department = (?) AND lvl = (?)',[block_id, department, level], (err, result) =>{
         if(err) throw err;
         officer_temp = result[0].officer_id;
         console.log(result);
-        con.query('update  complaint_assignment set  officer_id=(?) where complaint_id =(?)',[officer_temp,complaint_id], (error, result) =>{
+        console.log(com_id);
+        con.query('update  complaint_assignment set  officer_id=(?) where complaint_id =(?)',[officer_temp,com_id], (err, result) =>{
             if(err) throw err;
             console.log("complaint tranfererd");
         });

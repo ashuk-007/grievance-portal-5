@@ -39,10 +39,15 @@
           <h4>Complain ID</h4>
           <div class="field"><%= com_id%></div>
           <div class="space"></div>
+          <input name="com_id" class="invis" value="<%= com_id%>">
+          <input name="level" class="invis" value= "<%= lvl%>">
           <h4>Department Name</h4>
-          <input type="text" name="deppt_name" placeholder="Enter Department Name" required>
+          <input type="text" name="department" placeholder="Enter Department Name" required>
           <div class="space"></div>
-         <input type="submit" name="Login" id="Login" value="Transfer">
+          <h4>Block ID</h4>
+          <input type="text" name="block_id" placeholder="Enter Block ID" required>
+          <div class="space"></div>
+          <input type="submit" name="Login" id="Login" value="Transfer">
           <div class="space"></div>
         </div>
       </form>

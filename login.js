@@ -28,7 +28,7 @@ module.exports = function(con,email, password,res){
                         console.log(result1);
                         res.render("userHome.ejs",{result1});
                 })
-
+                
                 }}
                 else{
                     
