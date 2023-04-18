@@ -57,10 +57,8 @@
                 <div class="field" id="data"><%= result1[0].complaint_id%></div>
                 <div class="space"></div>
                 
-                <div class="field"><%= result1[0].department_id%></div>
                 <div class="bigspace"></div><br><div class="space"></div><br><br><br><br><br>
-                <!-- <div class="field">Grievance number.</div>
-                <div class="space"></div> -->
+
                 <div class="field">Grievance number.</div>
                 <div class="space"></div>
                 <div class="field">Grievance number.</div>    
@@ -81,8 +79,9 @@
         </form>
         <div class="space"></div>
         <form action="transfer" method="post">
+            
+
             <input type="text" name="com_id" class="invis">
-            <input type="text" name="level" class="invis" value="<%=result[0].lvl%>">
             <input type="submit" name="transfer" id="register" value="Transfer to another department">
         </form>
         <div class="space"></div>
@@ -95,4 +94,3 @@
   </body>
 </html>
 
->>>>>>> origin

@@ -9,7 +9,6 @@ const alert =  require("alert");
 const inputs = require('./user')
 const logim = require('./login')
 const officerlogim = require('./officerlogin')
-const complaint = require('./complaint')
 var offemail;
 var useremail;
 // const { logim} = require('./login')
@@ -21,7 +20,7 @@ let date_time = new Date();
 var con = mysql.createConnection({
     host : "localhost",
     user : "root",
-   password : "India@no.1",
+   password : "tanish@0601",
     database  : "gri"
 });
 app.use(express.json());
@@ -227,10 +226,10 @@ app.post("/addGrievance",async (req,res)=>{
  });
  app.post("/show_complain", (req,res)=>{
     var com_id= req.body.com_id;
-        console.log(com_id);
+        console.log("CKSDKC",com_id);
    var one=1;
         con.query("update  track set seen=(?) where complaint_id=(?)", [one,com_id], function(err, result, fields){
-            con.query("select * from complaint where complaint_id=(?)", [com_id], function(err, result1, fields){
+            con.query("select * from complaint natural join complaint_assignment natural join officer where complaint_id=(?)", [com_id], function(err, result1, fields){
             
                 res.render("offshow_complain",{result1});
     
@@ -275,10 +274,10 @@ app.post("/addGrievance",async (req,res)=>{
  app.post("/transfer",(req,res)=>{
     var com_id= req.body.com_id;
     var lvl = req.body.level;
+    console.log("lvlv of ofif",com_id);
     con.query("select * from department ", function(err, result, fields){
         if(err) throw err;
         console.log(result);
-        console.log(lvl);
         res.render("transfer",{com_id, lvl,result});
     })
     
@@ -290,11 +289,11 @@ app.post("/addGrievance",async (req,res)=>{
     //var department = req.body.department;
     var department = "Water";
     var level = req.body.level;
+    console.log("com_id",com_id);
     con.query('SELECT officer_id FROM officer where block_id = (?) AND department = (?) AND lvl = (?)',[block_id, department, level], (err, result) =>{
         if(err) throw err;
         officer_temp = result[0].officer_id;
         console.log(result);
-        console.log(com_id);
         con.query('update  complaint_assignment set  officer_id=(?) where complaint_id =(?)',[officer_temp,com_id], (err, result) =>{
             if(err) throw err;
             console.log("complaint tranfererd");
