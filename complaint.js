@@ -9,7 +9,7 @@ const { response } = require("express");
 var con = mysql.createConnection({
     host : "localhost",
     user : "root",
-   password : "India@no.1",
+   password : "tanish@0601",
     database  : "gri"
 });
 function getDept(){
