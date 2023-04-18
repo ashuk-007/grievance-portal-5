@@ -13,11 +13,15 @@ const complaint = require('./complaint')
 var offemail;
 var useremail;
 // const { logim} = require('./login')
+const griever = require('./addComplaint')
+var offemail;
+var date;
+let date_time = new Date();
 
 var con = mysql.createConnection({
     host : "localhost",
     user : "root",
-   password : "India@no.1",
+   password : "tanish@0601",
     database  : "gri"
 });
 app.use(express.json());
@@ -141,6 +145,30 @@ app.post("/register",(req,res)=>{
 
 
 
+ app.post("/addGrievance",async (req,res)=>{
+
+    var department = req.body.department;
+    var details = req.body.details;
+    // var image= req.file;
+    // var image_data = fs.readFileSync(image.path);
+    // var doc= req.body.file.uploadImage2;
+    // var doc_data = fs.readFileSync(doc.path);
+    var state = req.body.state;
+    var tehsil = req.body.tehsil;
+    var address = req.body.panchayat;
+    var district = req.body.district;
+    var block = req.body.block;
+    var pincode = req.body.pincode;
+    let date_time = new Date();
+    let date = date_time.toISOString().split('T')[0];
+    console.log(date_time);
+    console.log(date);
+    // const data = fs.readFileSync(image.path);
+
+    griever(con, useremail, date, department, details, state, tehsil, address, district, block, pincode)
+    res.render("userHome");
+ });
+
  app.post("/officerlogin", (req,res)=>{
     var password = req.body.password;
      offemail = req.body.Email;
@@ -151,7 +179,52 @@ app.post("/register",(req,res)=>{
   
  })
  
+//  app.post("/officerlogin", (req,res)=>{
+  
+//     var deppt = req.body.department;
+//     var details = req.body.details;
+//     var state = req.body.state;
+//     var tehsil = req.body.tehsil;
+//     var address = req.body.panchayat;
+//     var block= req.body.block;
+//     var pin = req.body.pincode;
+//     var com_id= Math.floor(Math.random() * 100000);
+//     var block_id ;
+//     con.connect(function(err){
+//         con.query("SELECT * from pincode where pin_code = (?) ", [pin], function(err, result, fields){
 
+//         if(err){
+//             console.log("PROBLEM");
+//             throw err;
+//         }
+//         block_id=result[0]
+      
+//     })
+//         con.query("select * from complaint natural join track where person_id=(?)",[result[0].], function(err, result1, fields){
+//             if(err) throw err;
+//             res.render("userHome.ejs",{result1});
+
+//         })
+    
+// });
+  
+//  })
+app.post("/addGrievance",async (req,res)=>{
+
+    var department = req.body.department;
+    var details = req.body.details;
+    var image= req.body.images;
+    var doc= req.body.document;
+    var state = req.body.state;
+    var tehsil = req.body.tehsil;
+    var address = req.body.panchayat;
+    var district = req.body.district;
+    var block = req.body.block;
+    var pincode = req.body.pincode;
+    let date = ("0" + date_time.getDate()).slice(-2);
+    griever(con, useremail, department, details, image, doc, state, tehsil, address, district, block, pincode)
+    res.render("userHome");
+ });
  app.post("/show_complain", (req,res)=>{
     var com_id= req.body.com_id;
         console.log(com_id);
@@ -194,29 +267,35 @@ app.post("/register",(req,res)=>{
 
   
  })
- app.post("/transfer", (req,res)=>{
+ app.get("/transfer",(req,res)=>{
     var com_id= req.body.com_id;
-    
-res.render("transfer.ejs",{com_id});
 
-  
- })
+    res.render("transfer.ejs",{com_id});
+})
  app.post("/transfer_confirm", (req,res)=>{
     var com_id= req.body.com_id;
+    var block_id = req.body.block_id;
+    var department = req.body.department;
+    var level = req.body.level;
+    con.query('SELECT officer_id FROM officer where block_id = (?) AND department = (?) AND lvl = (?)',[block_id, department, level], (error, result) =>{
+        if(err) throw err;
+        officer_temp = result[0].officer_id;
+        console.log(result);
+        con.query('update  complaint_assignment set  officer_id=(?) where complaint_id =(?)',[officer_temp,complaint_id], (error, result) =>{
+            if(err) throw err;
+            console.log("complaint tranfererd");
+        });
+    });
 
-//****** first find the officer_id of officer and then update in complain assignment*/
 
-    // con.query("update table complain_assignment solved=(?) where com_id=(?)", [one,com_id], function(err, result, fields){
-
-    //     res.render("officerHome");
-    //   });
-
+res.render("officerHome");
 
   
  })
+
  app.post("/send_to_higher authority", (req,res)=>{
-// from officer id you can find his level as well as his higher officer_id;
- // now do same as tranfer_confirm
+
+
   
  })
 
