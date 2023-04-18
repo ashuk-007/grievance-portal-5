@@ -306,10 +306,26 @@ res.render("officerHome");
   
  })
 
- app.post("/send_to_higher authority", (req,res)=>{
+ app.post("/send_to_higher", (req,res)=>{
+  var level = req.body.level;
+  level=level+1;
+  var com_id = req.body.com_id;
+  var block_id =req.body.block_id;
+  var deppt = req.body.deppt;
+  var officer_temp;
+  con.query('SELECT officer_id FROM officer where block_id = (?) AND department = (?) AND lvl = (?)',[block_id, deppt, level], (err, result) =>{
+    if(err) throw err;
+    if(result.length>0){
+    officer_temp = result[0].officer_id;}
+    console.log(result);
+    con.query('update  complaint_assignment set  officer_id=(?) where complaint_id =(?)',[officer_temp,com_id], (err, result) =>{
+        if(err) throw err;
+        console.log("send to higher authority");
+    });
+});
 
 
-  
+  res.render("officerHome");
  })
 
 

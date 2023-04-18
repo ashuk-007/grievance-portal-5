@@ -86,7 +86,11 @@
         </form>
         <div class="space"></div>
         <form action="send_to_higher" method="post">
-            <input type="text" name="com_id" class="invis">
+            <input type="hidden" id="custId" name="level" value=<%=result1[0].lvl %>>
+            <input type="hidden" id="custId" name="com_id" value=<%=result1[0].complaint_id %>>
+            <input type="hidden" id="custId" name="deppt" value=<%=result1[0].department %>>
+            <input type="hidden" id="custId" name="block_id" value=<%=result1[0].block_id %>>
+
             <input type="submit" name="send_to_higher" id="register" value="Send to Higher authority">
         </form>
     </div>
