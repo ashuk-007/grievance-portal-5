@@ -22,11 +22,12 @@ module.exports = function(con,email, password,res){
             if(result.length>0){
              
              if(result[0].pass==password){
-                con.query("select * from complaint natural join track where person_id=(?)", [result[0].person_id], function(err, result1, fields){
-                    console.log(result1);
-                    res.render("userHome",{result1});
-
-                });
+                con.query("select * from complaint inner join track on complaint.complaint_id = track.complaint_id inner join department on complaint.department_id = department.department_id where person_id = (?)",[result[0].person_id], function(err, result1, fields){
+                    if(err) throw err;
+                        if(err) throw err;
+                        console.log(result1);
+                        res.render("userHome.ejs",{result1});
+                })
 
                 }}
                 else{

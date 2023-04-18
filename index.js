@@ -49,15 +49,17 @@ app.get("/userHome",(req,res)=>{
     console.log("user enter in userHome");
     con.connect(function(err){
         con.query("SELECT * from person where email = (?) ", [useremail], function(err, result, fields){
-
         if(err){
             console.log("PROBLEM");
             throw err;
         }
-        con.query("select * from complaint natural join track where person_id=(?)",[result[0].person_id], function(err, result1, fields){
+        con.query("select * from complaint inner join track on complaint.complaint_id = track.complaint_id where person_id = (?)",[result[0].person_id], function(err, result1, fields){
             if(err) throw err;
-            res.render("userHome.ejs",{result1});
-
+            con.query("select * from department", function(err, result2, fields){
+                if(err) throw err;
+                console.log(result2);
+                res.render("userHome.ejs",{result1,result2});
+            });
         })
     })
 });
@@ -80,14 +82,32 @@ app.get("/postgrievanceRural", (req,res)=>{
                 })
             })
 
-    //         console.log(re);
-    // res.render("postgrievanceRural.ejs",{re});
-    
-
 })
 
 app.get("/trackgrievance", (req,res)=>{
     res.render("trackgrievance.ejs")
+})
+
+app.post("/track",(req,res)=>{
+    var com_id = req.body.com_id2;
+    con.query("select * from complaint inner join track on complaint.complaint_id = track.complaint_id inner join department on complaint.department_id = department.department_id where complaint.complaint_id = (?)",[com_id],function(err, result, fields){
+        if(err) throw err;
+        console.log(result);
+        if(result.length != 0){
+            res.render("trackgrievance.ejs", {result});
+        }else{
+            alert("Invalid Grievance number.");
+        }
+    })
+})
+
+app.post("/track2",(req,res)=>{
+    var com_id = req.body.com_id;
+    con.query("select * from complaint inner join track on complaint.complaint_id = track.complaint_id inner join department on complaint.department_id = department.department_id where complaint.complaint_id = (?)",[com_id],function(err, result, fields){
+        if(err) throw err;
+        console.log(result);
+        res.render("trackgrievance.ejs", {result});
+    })
 })
 
 app.get("/index",(req,res)=>{
@@ -153,7 +173,7 @@ app.post("/register",(req,res)=>{
     var com_id= req.body.com_id;
         console.log(com_id);
    var one=1;
-        con.query("update  track set inprogress=(?) where complaint_id=(?)", [one,com_id], function(err, result, fields){
+        con.query("update  track set progress=(?) where complaint_id=(?)", [one,com_id], function(err, result, fields){
          
             
           res.render("officerHome");

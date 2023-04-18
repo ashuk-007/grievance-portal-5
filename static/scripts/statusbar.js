@@ -6,11 +6,21 @@ var d = document.getElementsByClassName('field3')[0];
 var c1 = document.getElementsByClassName('circle1')[0];
 var c2 = document.getElementsByClassName('circle2')[0];
 var c3 = document.getElementsByClassName('circle3')[0];
-var x = "In-Progress";
+var y = document.getElementsByClassName("invis")[0].innerHTML;
+var z = document.getElementsByClassName("invis")[1].innerHTML;
 
 document.addEventListener("DOMContentLoaded", check());
 
 function check(){
+    if(y == 1){
+        x = "Solved";
+    }else{
+        if(z == 1){
+            x = "In-Progress";
+        }else{
+            x = "Unseen";
+        }
+    }
     if(x == "Unseen"){
         a.classList.remove('animate');
         a.style.height = "20%"

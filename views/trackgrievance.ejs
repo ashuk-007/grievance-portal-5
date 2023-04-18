@@ -27,10 +27,12 @@
           <ul>
               <li><a href="#">About Us</a></li>
               <li><a href="#">Support</a></li>
-              <li><a href="#">Profile</a></li>
+              <li><a href="index">Logout</a></li>
           </ul>
       </div>
   </nav>
+  <div class="invis"><%=result[0].solved%></div>
+  <div class="invis"><%=result[0].seen%></div>
   <div class="container">
     <div class="title1">Grievance Status</div>
         <div class="input-box">
@@ -48,7 +50,7 @@
                 <div class="space2"></div>
                 <h4>Application Details:</h4>
                 <div class="space2"></div>
-                <div class="field" id="widefield">Application Details</div>
+                <div class="field" id="widefield"><%= result[0].complaint_description%></div>
                 <div class="space3"></div>
                 <!-- <div class="space3"></div>
                 <h4>View Uploaded Files:</h4> -->
@@ -59,7 +61,7 @@
             </div>
             <div class="col2">
                 <div class="bigspace"></div>
-                <div class="field">Grievance number.</div>
+                <div class="field"><%= result[0].complaint_id%></div>
                 <div class="space"></div>
                 <div class="statusbar">
                     <div class="statusbarcontainer">
@@ -78,16 +80,15 @@
                 </div>
                 <div class="space"></div>
                 <div class="space"></div>
-                <div class="field">Grievance number.</div>
+                <div class="field"><%= result[0].department_name%></div>
                 <div class="space"></div>
-                <div class="field">Grievance number.</div>
+                <div class="field"></div>
                 <div class="bigspace"></div><br><div class="space"></div><br><br><br><br><br>
                 <!-- <div class="field">Grievance number.</div>
                 <div class="space"></div> -->
                 <div class="field">Grievance number.</div>
                 <div class="space"></div>
                 <div class="field">Grievance number.</div>
-                
             </div>
         </div>
   </div>

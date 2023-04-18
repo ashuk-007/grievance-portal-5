@@ -7,6 +7,7 @@
         <link rel="stylesheet" href="..\static\styles\navbar.css">
         <link rel = "stylesheet" href="..\static/styles/userHome.css">
         <script src="../static/scripts/navbar.js" defer></script>
+        <script src="../static/scripts/userHome.js" defer></script>
         <title>Grievance Portal</title>
     </head>
 
@@ -25,7 +26,7 @@
                 <ul>
                     <li><a href="#">About Us</a></li>
                     <li><a href="#">Support</a></li>
-                    <li><a href="#">Profile</a></li>
+                    <li><a href="index">Logout</a></li>
                 </ul>
             </div>
         </nav>
@@ -40,10 +41,21 @@
                     <p>Post a new Grievance</p>
                     <img src="../static/images/addGrievance.png">
                 </div></a>
-                <a href="trackgrievance"><div class="box3">
+                <a onclick="show()"><div class="box3">
                     <p>Track Grievance</p>
                     <img src="../static/images/trackGrievance.png">
                 </div></a>
+            </div>
+            <div class="popup">
+                <div class="title">Track Grievance</div>
+                <div class="space"></div>
+                <form action="track" method="post">
+                    <h4>Grievance number</h4>
+                    <div class="space"></div>
+                    <input type="text" name ="com_id2"placeholder="Enter Grievance number" required>
+                    <div class="space"></div>
+                    <input type="submit" name="" value="Track">
+                </form>
             </div>
             <div class="col2">
                 <h4>YOUR DASHBOARD</h4>
@@ -65,24 +77,23 @@
                             <td width="15%"><p>Track Grievance</p></td>
                             <td width="15%"><p>Submit Feedback</p></td>
                         </tr>
-                        
-                        <tr class="data">
-                            <td width="18%"><p id="greivanceNumber">1111111111111111</p></td>
-                            <td width="16%"><p id="dateRegistered">DD-MM-YYYY</p></td>
-                            <td width="25%"><p id="department">Department of Something</p></td>
-                            <td width="12%"><button type="button" id="status">Pending</button></td>
-                            <td width="15%"><a href="#"><img src="../static/images/trackGrievance.png"></a></td>
-                            <td width="10%"><a href="#"><img src="../static/images/feedback.png"></a></td>
-                        </tr>
-                        <tr class="data">
-                            <td width="18%"><p id="greivanceNumber">1111111111111111</p></td>
-                            <td width="16%"><p id="dateRegistered">DD-MM-YYYY</p></td>
-                            <td width="25%"><p id="department">Department of Something with a really long name.</p></td>
-                            <td width="12%"><button type="button" id="status">Pending</button></td>
-                            <td width="15%"><a href="#"><img src="../static/images/trackGrievance.png"></a></td>
-                            <td width="10%"><a href="#"><img src="../static/images/feedback.png"></a></td>
-                        </tr>
-                        
+                        <form action="track2" method="post" id="myform">
+                            <input type="text" name="com_id" class="invis">
+                        <% for(var i = 0; i<result1.length; i++){ %>
+                            <tr class="data" id=<%= i%>>
+                                <td width="18%"><p class="greivanceNumber"><%= result1[i].complaint_id%></p></td>
+                                <td width="16%"><p id="dateRegistered"><%= result1[i].complaint_date%></p></td>
+                                <td width="25%"><p id="department"><%= result1[i].department_name%></p></td>
+                                <% if(result1[i].solved == 1){ %>
+                                    <td width="12%"><button type="button" class="status">Solved</button></td>
+                                <%}else{ %>
+                                    <td width="12%"><button type="button" class="status">Pending</button></td>
+                                <%} %>                                
+                                <td width="15%"><a onclick="check(this.parentNode.parentNode)"><img src="../static/images/trackGrievance.png"></a></td>
+                                <td width="10%"><a href="#"><img src="../static/images/feedback.png"></a></td>
+                            </tr>
+                        <% } %>
+                        </form>
                         </table>        
                 </div>
             </div>
