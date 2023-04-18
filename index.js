@@ -327,7 +327,27 @@ res.render("officerHome");
 
   res.render("officerHome");
  })
+ app.post("/officer_register",(req,res)=>{
 
+   
+   res.render(officer_register.ejs);
+   
+    })
+ app.post("/officer_register_confirm",(req,res)=>{
+ var officer_name=req.body.officer_name;
+ var email = req.body.email;
+ var department = req.body.department;
+ var block_id = req.body.block_id;
+ var password = req.body.password;
+  var officer_id = Math.floor(Math.random() * 100000);
+var lvl = req.body.level;
+con.query('INSERT INTO officer (officer_id,officer_name,lvl,department,block_id,email,pass) VALUES (?, ?, ?, ?, ?,?,?)', [officer_id,officer_name,lvl, department,block_id ,email,password],(error, 
+    results) => {
+        if (error)  throw error;
+        });
+
+
+ })
 
 
 app.listen(port,()=>{
