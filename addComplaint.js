@@ -17,7 +17,7 @@ const user = require("./user");
 
 module.exports = async function(con, useremail, date, department, details, state, tehsil, address, district, block, pincode){
     con.connect(function(err){
-        
+        console.log(useremail);
         if(err) throw err;
 
         let check = true;
@@ -35,13 +35,14 @@ module.exports = async function(con, useremail, date, department, details, state
             else{
                  user_temp = result[0].person_id;
                  console.log(user_temp);
-                //  user_temp = user_id[0].user_id;
+                // user_temp = user_id[0].user_id;
             }
             // }
         });
 
         con.query('SELECT block_id from area where block_name = (?)', [block], function(err, result, fields){
             // console.log(result[0]);
+            console.log(block);
             if(err) throw err;
             // else{
              else {
@@ -72,7 +73,7 @@ module.exports = async function(con, useremail, date, department, details, state
             console.log(user_temp);
             console.log(dept_temp);
             console.log(date_temp);
-            con.query('INSERT INTO complaint (complaint_id, person_id,  block_id, department_id, complaint_date, address, complaint_description, image) VALUES (?, ?, ?, ?, ?, ?, ?)',[complaint_id, user_temp, block_temp, dept_temp, date_temp , address, details], (error, results) => {
+            con.query('INSERT INTO complaint (complaint_id, person_id,  block_id, department_id, complaint_date, address, complaint_description) VALUES (?, ?, ?, ?, ?, ?, ?)',[complaint_id, user_temp, block_temp, dept_temp, date_temp , address, details], (error, results) => {
                 if(err) throw err;
                 // console.log(results);
                 console.log('LASTOFUS')
@@ -88,7 +89,15 @@ module.exports = async function(con, useremail, date, department, details, state
         }, 5000);
 
         setTimeout(() => {
-            con.query('INSERT INTO complaint_assignment (complaint_id, officer_id) VALUE (?, ?)',[complaint_id, officer_temp], (error, result) =>{
+            con.query('INSERT INTO complaint_assignment (complaint_id, officer_id) VALUE (?, ?)',[complaint_id, officer_temp], (err, result) =>{
+                if(err) throw err;
+                console.log(result);
+            });
+        }, 10000);
+
+        setTimeout(() => {
+            var zero = 0;
+            con.query('INSERT INTO track (complaint_id, seen, progress, forwarded, solved, transfer_counter, level_update_cnt) VALUE (?, ?,?,?,?,?,?)',[complaint_id, zero,zero,zero,zero,zero,zero], (err, result) =>{
                 if(err) throw err;
                 console.log(result);
             });

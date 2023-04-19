@@ -45,9 +45,13 @@
 
       
           <h4>Department Name</h4>
-          <input type="text" name="department" placeholder="Enter Department Name" required>
+          <select name="department">
+            <% for(var i = 0; i<result.length; i++){ %>
+              <option value="<%= result[i].department_name%>"><%= result[i].department_name%></option>
+            <%}%>
+          </select>
           <div class="space"></div>
-          <h4>officer level</h4>
+          <h4>Officer level</h4>
           <input type="text" name="level" placeholder="Enter officer level" required>
           <div class="space"></div>
           <h4>Block ID</h4>

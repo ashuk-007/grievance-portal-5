@@ -25,7 +25,7 @@ module.exports = function(con,email, password,res){
             if(result.length>0){
              
              if(result[0].pass==password){
-                con.query("select * from complaint_assignment natural join officer where officer_id=(?) ", [result[0].officer_id], function(err, result1, fields){
+                con.query("select * from complaint_assignment natural join officer natural join complaint natural join track where officer_id=(?) ", [result[0].officer_id], function(err, result1, fields){
                     console.log(result1);
                     res.render("officerHome",{result1});
 

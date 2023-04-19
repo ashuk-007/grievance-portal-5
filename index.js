@@ -20,7 +20,7 @@ let date_time = new Date();
 var con = mysql.createConnection({
     host : "localhost",
     user : "root",
-   password : "tanish@0601",
+   password : "India@no.1",
     database  : "gri"
 });
 app.use(express.json());
@@ -127,7 +127,7 @@ app.post("/register",(req,res)=>{
     var ageNumber= req.body.ageNumber;
     var gender = req.body.gender;
     var email = req.body.email;
-    useremail=email;
+    // useremail=email;
     inputs(con, name, password, aadharNumber, mobileNumber, ageNumber, gender, email)
     res.render("userlogin");
  });
@@ -136,7 +136,7 @@ app.post("/register",(req,res)=>{
     var password = req.body.password;
     var email = req.body.email;
     console.log(email);
-
+    useremail = email;
      ans=logim(con,email, password,res);
 
   
@@ -153,6 +153,7 @@ app.post("/register",(req,res)=>{
     // var doc= req.body.file.uploadImage2;
     // var doc_data = fs.readFileSync(doc.path);
     var state = req.body.state;
+    console.log(state);
     var tehsil = req.body.tehsil;
     var address = req.body.panchayat;
     var district = req.body.district;
@@ -162,10 +163,29 @@ app.post("/register",(req,res)=>{
     let date = date_time.toISOString().split('T')[0];
     console.log(date_time);
     console.log(date);
+    console.log(block);
     // const data = fs.readFileSync(image.path);
 
     griever(con, useremail, date, department, details, state, tehsil, address, district, block, pincode)
-    res.render("userHome");
+    setTimeout(()=>{
+        con.connect(function(err){
+            con.query("SELECT * from person where email = (?) ", [useremail], function(err, result, fields){
+            if(err){
+                console.log("PROBLEM");
+                throw err;
+            }
+            con.query("select * from complaint natural join track natural join department where person_id = (?)",[result[0].person_id], function(err, result1, fields){
+                if(err) throw err;
+                con.query("select * from department", function(err, result2, fields){
+                    if(err) throw err;
+                    console.log(result2);
+                    res.render("userHome.ejs",{result1,result2});
+                });
+            })
+        })
+    });
+    },10000);
+    
  });
 
  app.post("/officerlogin", (req,res)=>{
@@ -208,22 +228,22 @@ app.post("/register",(req,res)=>{
 // });
   
 //  })
-app.post("/addGrievance",async (req,res)=>{
+// app.post("/addGrievance",async (req,res)=>{
 
-    var department = req.body.department;
-    var details = req.body.details;
-    var image= req.body.images;
-    var doc= req.body.document;
-    var state = req.body.state;
-    var tehsil = req.body.tehsil;
-    var address = req.body.panchayat;
-    var district = req.body.district;
-    var block = req.body.block;
-    var pincode = req.body.pincode;
-    let date = ("0" + date_time.getDate()).slice(-2);
-    griever(con, useremail, department, details, image, doc, state, tehsil, address, district, block, pincode)
-    res.render("userHome");
- });
+//     var department = req.body.department;
+//     var details = req.body.details;
+//     var image= req.body.images;
+//     var doc= req.body.document;
+//     var state = req.body.state;
+//     var tehsil = req.body.tehsil;
+//     var address = req.body.panchayat;
+//     var district = req.body.district;
+//     var block = req.body.block;
+//     var pincode = req.body.pincode;
+//     let date = ("0" + date_time.getDate()).slice(-2);
+//     griever(con, useremail, department, details, image, doc, state, tehsil, address, district, block, pincode)
+//     res.render("userHome");
+//  });
  app.post("/show_complain", (req,res)=>{
     var com_id= req.body.com_id;
         console.log("CKSDKC",com_id);
@@ -246,9 +266,14 @@ app.post("/addGrievance",async (req,res)=>{
         console.log(com_id);
    var one=1;
         con.query("update  track set progress=(?) where complaint_id=(?)", [one,com_id], function(err, result, fields){
-         
+          con.query("select* from officer where email = (?)",[offemail],function(err,result2,fields){
+            if(err) throw err;
+            con.query("select * from complaint_assignment natural join officer natural join complaint natural join track where officer_id=(?)",[result2[0].officer_id],function(err,result1,fields){
+                res.render("officerHome",{result1});
+            })
+          })
             
-          res.render("officerHome");
+         
         });
 
 
@@ -259,8 +284,12 @@ app.post("/addGrievance",async (req,res)=>{
         console.log(com_id);
    var one=1;
         con.query("update  track set solved=(?) where complaint_id=(?)", [one,com_id], function(err, result, fields){
-
-          res.render("officerHome");
+            con.query("select* from officer where email = (?)",[offemail],function(err,result2,fields){
+                if(err) throw err;
+                con.query("select * from complaint_assignment natural join officer natural join complaint natural join track where officer_id=(?)",[result2[0].officer_id],function(err,result1,fields){
+                    res.render("officerHome",{result1});
+                })
+              })
         });
 
 
@@ -297,36 +326,49 @@ app.post("/addGrievance",async (req,res)=>{
         con.query('update  complaint_assignment set  officer_id=(?) where complaint_id =(?)',[officer_temp,com_id], (err, result) =>{
             if(err) throw err;
             console.log("complaint tranfererd");
+            con.query("select* from officer where email = (?)",[offemail],function(err,result2,fields){
+                if(err) throw err;
+                con.query("select * from complaint_assignment natural join officer natural join complaint natural join track where officer_id=(?)",[result2[0].officer_id],function(err,result1,fields){
+                    res.render("officerHome",{result1});
+                })
+              })
         });
     });
-
-
-res.render("officerHome");
-
   
  })
 
  app.post("/send_to_higher", (req,res)=>{
-  var level = req.body.level;
-  level=level+1;
+  var level = req.body.level.toString();
+  console.log(typeof level);
+  var leve=parseInt(level);
+  leve=leve+1;
+  level = leve.toString();
   var com_id = req.body.com_id;
   var block_id =req.body.block_id;
   var deppt = req.body.deppt;
   var officer_temp;
-  con.query('SELECT officer_id FROM officer where block_id = (?) AND department = (?) AND lvl = (?)',[block_id, deppt, level], (err, result) =>{
+  console.log(block_id,leve);
+  console.log(block_id,level);
+
+  con.query('SELECT * FROM officer where block_id = (?) AND department = (?) AND lvl = (?)',[block_id, deppt, level], (err, result) =>{
     if(err) throw err;
     if(result.length>0){
     officer_temp = result[0].officer_id;}
-    console.log(result);
+    console.log( "a = " , result);
     con.query('update  complaint_assignment set  officer_id=(?) where complaint_id =(?)',[officer_temp,com_id], (err, result) =>{
         if(err) throw err;
         console.log("send to higher authority");
+        con.query("select* from officer where email = (?)",[offemail],function(err,result2,fields){
+            if(err) throw err;
+            con.query("select * from complaint_assignment natural join officer natural join complaint natural join track where officer_id=(?)",[result2[0].officer_id],function(err,result1,fields){
+                res.render("officerHome",{result1});
+            })
+          })
     });
 });
+})
 
 
-  res.render("officerHome");
- })
  app.post("/officer_register",(req,res)=>{
 
    

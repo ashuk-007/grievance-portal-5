@@ -72,26 +72,26 @@
                         <tr class="toprow">
                             <td width="22%"><p>Grievance Number</p></td>
                             <td width="20%"><p>Date Registered</p></td>
-                            <td width="33%"><p>Department Name</p></td>
+                            <td width="28%"><p>Department Name</p></td>
                             <td width="10%"><p>Status</p></td>
-                            <td width="15%"><p>View</p></td>
+                            <td width="19%"><p>View</p></td>
                         </tr>
                         <form action="show_complain" method="post">
                         <input type="text" name="com_id" id="invis">
-                        <tr class="data" id="1">
-                            <td width="18%"><p class="greivanceNumber">1</p></td>
-                            <td width="27%"><p id="dateRegistered">DD-MM-YYYY</p></td>
-                            <td width="28%"><p id="department">Department of Something</p></td>
-                            <td width="16%"><button type="button" id="status">Pending</button></td>
-                            <td width="16%"><input type="submit" id="view" value="View" onclick ="update(this.parentNode.parentNode)"></td>
-                        </tr>
-                        <tr class="data" id="2">
-                            <td width="18%"><p class="greivanceNumber">2</p></td>
-                            <td width="27%"><p id="dateRegistered">DD-MM-YYYY</p></td>
-                            <td width="28%"><p id="department">Department of Something</p></td>
-                            <td width="16%"><button type="button" id="status">Pending</button></td>
-                            <td width="16%"><input type="submit" id="view" value="View" onclick ="update(this.parentNode.parentNode)"></td>
-                        </tr>
+                        <% for(var i = 0; i<result1.length; i++){ %>
+                            <tr class="data" id="<%= i%>">
+                                <td width="18%"><p class="greivanceNumber"><%= result1[i].complaint_id%></p></td>
+                                <td width="27%"><p id="dateRegistered"><%= result1[i].complaint_date%></p></td>
+                                <td width="28%"><p id="department"><%= result1[i].department%></p></td>
+                                <% if(result1[i].solved == '1'){ %>
+                                    <td width="16%"><button type="button" class="status">Solved</button></td>
+                                <% }else{ %>
+                                    <td width="16%"><button type="button" class="status">Pending</button></td>
+                                <% } %>
+                                
+                                <td width="16%"><input type="submit" id="view" value="View" onclick ="update(this.parentNode.parentNode)"></td>
+                            </tr>
+                        <% } %>
                         </form>
                         </table>        
                 </div>
