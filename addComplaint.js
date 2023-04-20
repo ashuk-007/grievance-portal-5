@@ -23,7 +23,7 @@ module.exports = async function(con, useremail, date, department, details, state
         let check = true;
 
         let comp_id = Math.floor(Math.random() * 100000);
-        let complaint_id = "complaint " + comp_id;
+        let complaint_id = "complaint" + comp_id;
         let user_temp, dept_temp, block_temp;
         // let date = '2023-04-12';
         let date_temp = date.replaceAll('/', '-');

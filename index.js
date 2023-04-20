@@ -315,10 +315,9 @@ app.post("/register",(req,res)=>{
  app.post("/transfer_confirm", (req,res)=>{
     var com_id= req.body.com_id;
     var block_id = req.body.block_id;
-    //var department = req.body.department;
-    var department = "Water";
+    var department = req.body.department;
     var level = req.body.level;
-    console.log("com_id",com_id);
+    console.log("com_id = ",com_id);
     con.query('SELECT officer_id FROM officer where block_id = (?) AND department = (?) AND lvl = (?)',[block_id, department, level], (err, result) =>{
         if(err) throw err;
         officer_temp = result[0].officer_id;

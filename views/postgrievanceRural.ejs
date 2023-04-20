@@ -52,7 +52,12 @@
           <div class="title">Complain Details</div>
           <div class="space"></div>
           <h4>Department</h4>
-          <input type="text" name="department" placeholder="Select Department" required>
+          <select name="department">
+            <% for(var i = 0; i<result.length; i++){ %>
+              <option value= "<%= result[i].department_name%>"><%= result[i].department_name%></option>
+            <%}%>
+          </select>
+          <!-- <input type="text" name="department" placeholder="Select Department" required> -->
           <div class="space"></div>
           <h4>Application Details</h4>
           <input type="text" name="details" id="details">
