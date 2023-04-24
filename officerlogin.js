@@ -8,8 +8,7 @@ const app = express();
 const port =4000;
 const hbs = require("ejs")
 const alert =  require("alert");
-const encoding = ["Tehsildar","Block Development Officer", "District Collector", "Commisioner", "District Development Officer", "Secretory"];
-
+const encoding = ["Rural Development Officer","Block Development Officer", "District Collector", "Commisioner", "District Development Officer", "Secretory"];
 
 module.exports = function(con,email, password,res){
     con.connect(function(err){
