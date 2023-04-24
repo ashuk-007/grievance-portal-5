@@ -222,7 +222,7 @@ function addressAutocomplete(containerElement, callback, options) {
     document.getElementById("district").value = data.county;
     console.log(data.district);
     document.getElementById("pincode").value = data.postcode;
-
+    document.getElementById("state").value = data.state;
     console.log(data.country);
   }, {
     placeholder: "Enter an address here"
