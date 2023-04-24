@@ -21,7 +21,7 @@ const encoding = ["Rural Development Officer","Block Development Officer", "Dist
 var con = mysql.createConnection({
     host : "localhost",
     user : "root",
-   password : "India@no.1",
+   password : "MySQL@123",
     database  : "gri"
 });
 app.use(express.json());
@@ -406,6 +406,24 @@ con.query('INSERT INTO officer (officer_id,officer_name,lvl,department,block_id,
           })
 
 
+ })
+
+ app.post("/officer_response", (req, res)=>{
+    var response = req.body.response;
+    var complaint_id = req.body.com_id;
+    var prev;
+    con.query('SELECT officer_response from track where complaint_id = (?)', [complaint_id], (error, results) =>{
+        if(error) throw error;
+        else{
+            prev = results[0].officer_response;
+            console.log(results);
+        }
+    })
+    prev += "#";
+    prev += response;
+    con.query('UPDATE track SET officer_response = (?) where complaint_id = (?)', [prev, complaint_id], (error, results)=>{
+        if(error) throw error;
+    });
  })
 
 
