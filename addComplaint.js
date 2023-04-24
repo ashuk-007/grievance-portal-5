@@ -100,7 +100,7 @@ module.exports = async function(con, useremail, date, department, details, state
 
         setTimeout(() => {
             var zero = 0;
-            con.query('INSERT INTO track (complaint_id, seen, inprogress, forwarded, solved, transfer_counter, level_update_cnt) VALUE (?, ?,?,?,?,?,?)',[complaint_id, zero,zero,zero,zero,zero,zero], (err, result) =>{
+            con.query('INSERT INTO track (complaint_id, seen, inprogress, forwarded, solved, transfer_counter, level_update_cnt, user_response, officer_response) VALUE (?, ?,?,?,?,?,?,?,?)',[complaint_id, zero,zero,zero,zero,zero,zero,"First","First"], (err, result) =>{
                 if(err) throw err;
                 console.log(result);
             });

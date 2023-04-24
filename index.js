@@ -21,7 +21,7 @@ const encoding = ["Rural Development Officer","Block Development Officer", "Dist
 var con = mysql.createConnection({
     host : "localhost",
     user : "root",
-   password : "MySQL@123",
+   password : "India@no.1",
     database  : "gri"
 });
 app.use(express.json());
@@ -255,7 +255,7 @@ app.post("/register",(req,res)=>{
         console.log("CKSDKC",com_id);
    var one=1;
         con.query("update  track set seen=(?) where complaint_id=(?)", [one,com_id], function(err, result, fields){
-            con.query("select * from complaint natural join complaint_assignment natural join officer where complaint_id=(?)", [com_id], function(err, result1, fields){
+            con.query("select * from complaint natural join complaint_assignment natural join officer natural join track where complaint_id=(?)", [com_id], function(err, result1, fields){
             
                 res.render("offshow_complain",{result1});
     
@@ -411,19 +411,46 @@ con.query('INSERT INTO officer (officer_id,officer_name,lvl,department,block_id,
  app.post("/officer_response", (req, res)=>{
     var response = req.body.response;
     var complaint_id = req.body.com_id;
+
+    console.log(complaint_id);
     var prev;
-    con.query('SELECT officer_response from track where complaint_id = (?)', [complaint_id], (error, results) =>{
+    con.query('SELECT * from track where complaint_id = (?)', [complaint_id], (error, results) =>{
         if(error) throw error;
         else{
-            prev = results[0].officer_response;
-            console.log(results);
+
+            
+            prev = results[0].officer_response.toString();
+            
+            prev += "#";
+            prev += response;
+            con.query('UPDATE track SET officer_response = (?) where complaint_id = (?)', [prev, complaint_id], (error, results)=>{
+                if(error) throw error;
+                con.query("select * from complaint natural join complaint_assignment natural join officer natural join track where complaint_id=(?)", [complaint_id], function(err, result1, fields){
+                    
+                    res.render("offshow_complain",{result1});
+            
+                });
+            });
+            
         }
     })
-    prev += "#";
-    prev += response;
-    con.query('UPDATE track SET officer_response = (?) where complaint_id = (?)', [prev, complaint_id], (error, results)=>{
+   
+
+   
+ })
+
+ app.post("/user_response", (req, res) => {
+    var response = req.body.response;
+    var complaint_id = req.body.com_id;
+
+    con.query('UPDATE track set user_response = (?) where complaint_id = (?)', [response, complaint_id], (error, results)=>{
         if(error) throw error;
-    });
+        con.query("select * from complaint inner join track on complaint.complaint_id = track.complaint_id inner join department on complaint.department_id = department.department_id where complaint.complaint_id = (?)",[complaint_id],function(err, result, fields){
+            if(err) throw err;
+            console.log(result);
+            res.render("trackgrievance.ejs", {result});
+        })
+    })
  })
 
 

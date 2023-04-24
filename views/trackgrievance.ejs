@@ -34,7 +34,8 @@
   <div class="invis"><%=result[0].solved%></div>
   <div class="invis"><%=result[0].seen%></div>
   <div class="container">
-    <div class="title1">Grievance Status</div>
+    <div id="left">
+        <div class="title1">Grievance Status</div>
         <div class="input-box">
             <div class="col1">
                 <div class="title">Complain Details</div>
@@ -60,8 +61,12 @@
                 <h4>Time left:</h4>
                 <div class="space2"></div>
                 <h4>Officer Response:</h4>
-                <div class="space2"></div>
-                <div class="field" id="widefield">Sapmle Officer Response 1</div>
+                <% result[0].officer_response.split("#").forEach(element=>{ 
+                    if(element != "First"){%>
+                    <div class="space2"></div> 
+                    <div class="field" id="widefield"><%= element%></div>
+                <% }}) %>
+                
                 <div class="space2"></div>
                 <div class="field" id="widefield">Sample Officer Response 2</div>
             </div>
@@ -97,6 +102,19 @@
                 <div class="field">Grievance number.</div>
             </div>
         </div>
+    </div>
+    <div id="right">
+        <div class="title1">Action</div>
+        <div class="space"></div>
+        <form action="user_response" method="post">
+            <h4>Send Message</h4>
+            <div class="space"></div>
+            <input type="hidden" name="com_id" value="<%= result[0].complaint_id%>">
+            <input type="text" name="response" id="tallField" placeholder="Enter message" required>
+            <div class="space"></div>
+            <input type="submit" name="submit" value="Send">
+        </form> 
+    </div>
   </div>
   </body>
 </html>

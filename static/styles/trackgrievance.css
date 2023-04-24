@@ -19,6 +19,7 @@ html, body{
   top: 200px;
   left: 50%;
   position: fixed;
+  z-index: -1;
 }
 
 .row{
@@ -29,15 +30,29 @@ html, body{
 
 .container{
   display: flex;
-  flex-direction: column;
-  height: 1150px;
-  max-width: 1000px;
-  width: 100%;
+  flex-direction: row;
+  height: 1500px;
+  width: 90%;
   padding: 25px 30px;
   margin-left: 5rem;
   margin-top: 2rem;
   border-radius: 5px;
-    
+}
+
+.container #left{
+    float: left;
+    height: 100%;
+    width: 70%;
+    overflow: auto;
+    max-width: 800px;
+}
+
+.container #right{
+    float: left;
+    height: 100%;
+    width: 40%;
+    overflow: auto;
+    margin-left: 3rem;
 }
 
 .container .title{
@@ -207,11 +222,12 @@ html, body{
 
 .container #widefield{
   width: 340%;
+  max-width: 800px;
 }
 
 .container .input-box .col2{
     margin-top: 2.5rem;
-    margin-left: 10rem;
+    margin-left: 1.5rem;
 }
 
 .container .input-box .col2 .statusbar{
@@ -330,6 +346,37 @@ html, body{
   outline-width: 1.43578px;
   font-size: 16px;
   padding: 12px;
+}
+
+.container #right form input{
+  z-index: 1;
+  width: 100%;
+  height: 45px;
+  outline: auto;
+  outline-color: #207198;
+  border-radius: 5px;
+  text-align: center;
+  outline-width: 1.43578px;
+  font-size: 16px;
+  border: none;
+}
+
+.container #right input[type="submit"]{
+  background-image: linear-gradient(to right, #6780F0,#38B6FF);
+  outline: none;
+  font-size: 17px;
+  color: #fff;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.container #right input[type="submit"]:hover{
+  letter-spacing: 1px;
+  background-image: linear-gradient(to right, #6780F0,#38B6FF);
+}
+
+.container #right #tallField{
+  height: 90px;
 }
 
 
