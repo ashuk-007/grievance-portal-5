@@ -15,7 +15,7 @@ const user = require("./user");
 //         return new Promise(resolve => setTimeout(resolve, time));
 //     }  
 
-module.exports = async function(con, useremail, date, department, details, state, tehsil, address, district, block, pincode){
+module.exports = async function(con, useremail, date, department, details, state, address, district, pincode){
     con.connect(function(err){
         console.log(useremail);
         if(err) throw err;
@@ -40,9 +40,9 @@ module.exports = async function(con, useremail, date, department, details, state
             // }
         });
 
-        con.query('SELECT block_id from area where block_name = (?)', [block], function(err, result, fields){
+        con.query('SELECT block_id from pincode where pin_code = (?)', [pincode], function(err, result, fields){
             // console.log(result[0]);
-            console.log(block);
+            console.log(pincode);
             if(err) throw err;
             // else{
              else {

@@ -223,6 +223,7 @@ function addressAutocomplete(containerElement, callback, options) {
     console.log(data.district);
     document.getElementById("pincode").value = data.postcode;
     document.getElementById("state").value = data.state;
+    document.getElementById("address").value = data.formatted;
     console.log(data.country);
   }, {
     placeholder: "Enter an address here"

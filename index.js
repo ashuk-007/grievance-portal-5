@@ -21,7 +21,7 @@ const encoding = ["Tehsildar","Block Development Officer", "District Collector",
 var con = mysql.createConnection({
     host : "localhost",
     user : "root",
-   password : "India@no.1",
+   password : "MySQL@123",
     database  : "gri"
 });
 app.use(express.json());
@@ -149,25 +149,21 @@ app.post("/register",(req,res)=>{
 
     var department = req.body.department;
     var details = req.body.details;
-    // var image= req.file;
-    // var image_data = fs.readFileSync(image.path);
-    // var doc= req.body.file.uploadImage2;
-    // var doc_data = fs.readFileSync(doc.path);
     var state = req.body.state;
     console.log(state);
-    var tehsil = req.body.tehsil;
-    var address = req.body.panchayat;
+    var address = req.body.address;
     var district = req.body.district;
-    var block = req.body.block;
     var pincode = req.body.pincode;
     let date_time = new Date();
     let date = date_time.toISOString().split('T')[0];
     console.log(date_time);
     console.log(date);
-    console.log(block);
+    console.log(address);
+    // console.log(block);
     // const data = fs.readFileSync(image.path);
 
-    griever(con, useremail, date, department, details, state, tehsil, address, district, block, pincode)
+    griever(con, useremail, date, department, details, state, address, district,pincode)
+
     setTimeout(()=>{
         con.connect(function(err){
             con.query("SELECT * from person where email = (?) ", [useremail], function(err, result, fields){
