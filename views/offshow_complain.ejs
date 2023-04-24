@@ -103,7 +103,9 @@
         </form>
         <div class="space"></div>
         <form action="officer_response" method="post">
-            <input type = "text" name="response" placeholder="Enter response" required>
+            <div class="space"><br></div>
+            <input type="hidden" name="com_id" value=<%= result1[0].complaint_id %>>
+            <input type = "text" name="response" placeholder="Enter response" id="tallField" required>
             <div class="space"></div>
             <input type="submit" name="officer_response" value="Send">
         </form>
