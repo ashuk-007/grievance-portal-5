@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8">
+    
+    <link rel="stylesheet" href="../static/styles/register.css"> 
+    <link rel="stylesheet" href="../static/styles/navbar.css">
+    <script src="../static/scripts/navbar.js" defer></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script>
+      function checkPassword(){
+        var s1 = document.getElementsByName("password")[0].value;
+        var s2 = document.getElementsByName("confirmPassword")[0].value;
+        if(s1 != s2){
+          alert("Password and Confirm Password must be same.");
+          event.preventDefault();
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <img src="../static/images/bgvector1.png" id="bgimg">
+    <nav class="navbar">
+      <div class="logo">
+          <img src="../static/images/Logo2.png">
+          <p1>Grievance &nbsp</p1> <p2>Portal</p2>
+      </div>
+      <a href="#" class="toggle">
+          <span class="bar"></span>
+          <span class="bar"></span>
+          <span class="bar"></span>
+      </a>
+      <div class="navbar-links">
+          <ul>
+              <li><a href="officerHome">Home</a></li>
+              <li><a href="#">About Us</a></li>
+              <li><a href="#">Support</a></li>
+              <li><a href="officerlogin">Officer Login</a></li>
+          </ul>
+      </div>
+  </nav>
+  <div class="row">
+    <div class="container">
+      <form action="officer_register_confirm" method="post" onsubmit="checkPassword()">
+        <div class="title">Add new officer.</div>
+        <div class="input-box">
+          <h4>Officer Name</h4>
+          <input type="text" name="officer_name" placeholder="Enter Officer Name" required>
+          <div class="space"></div>
+          <h4>Email</h4>
+          <input type="email" name="email" placeholder="Enter Email" required>
+          <div class="space"></div>
+          <h4>Department Name</h4>
+          <select name="department">
+            <% for(var i = 0; i<result.length; i++){ %>
+              <option value="<%= result[i].department_name%>"><%= result[i].department_name%></option>
+            <%}%>
+          </select>
+          <div class="space"></div>
+          <h4>Post</h4>
+          <select name="level">
+            <% for(var i = 0; i<result1[0].lvl - 1; i++){ 
+                var t = i + 1;
+                %>
+                <option value = "<%= t%>"><%= encoding[i]%></option>
+            <%}%>
+          </select>
+          <h4>Block ID</h4>
+          <input type="text" name="block_id" placeholder="Enter block ID" required>
+          <div class="space"></div>
+          <h4>Password</h4>
+          <input type="password" name="password" placeholder="Create a new password" required>
+          <div class="space"></div>
+          <h4>Confirm Password</h4>
+          <input type="password" name="confirmPassword" placeholder="Retype Password" required>
+          <div class="space"></div>
+          <input type="submit" name="register" id="register" value="Register">
+          <div class="space"></div>
+          <div class="space"></div>
+        </div>
+      </form>
+        <!-- <div class="option"> <u>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</u>Or<u>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</u></div>
+        <div class="mobile">
+          <a href="#"><i class="fab fa-mobile"></i>Continue with mobile number</a>
+        </div>
+        <div class="aadhar">
+          <a href="#"><i class="fab fa-aadhar-f"></i>Continue with aadhar number</a>
+        </div> -->
+    </div>
+  </div>
+  </body>
+</html>
+

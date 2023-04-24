@@ -16,6 +16,7 @@ const griever = require('./addComplaint')
 var offemail;
 var date;
 let date_time = new Date();
+const encoding = ["Tehsildar","Block Development Officer", "District Collector", "Commisioner", "District Development Officer", "Secretory"];
 
 var con = mysql.createConnection({
     host : "localhost",
@@ -188,6 +189,15 @@ app.post("/register",(req,res)=>{
     
  });
 
+ app.get("/officerHome",(req,res)=>{
+    con.query("select* from officer where email = (?)",[offemail],function(err,result,fields){
+        if(err) throw err;
+        con.query("select * from complaint_assignment natural join officer natural join complaint natural join track where officer_id=(?)",[result[0].officer_id],function(err,result1,fields){
+            res.render("officerHome.ejs",{encoding,result,result1});
+        })
+      })
+ })
+
  app.post("/officerlogin", (req,res)=>{
     var password = req.body.password;
      offemail = req.body.Email;
@@ -265,11 +275,11 @@ app.post("/register",(req,res)=>{
     var com_id= req.body.com_id;
         console.log(com_id);
    var one=1;
-        con.query("update  track set progress=(?) where complaint_id=(?)", [one,com_id], function(err, result, fields){
-          con.query("select* from officer where email = (?)",[offemail],function(err,result2,fields){
+        con.query("update  track set progress=(?) where complaint_id=(?)", [one,com_id], function(err, result2, fields){
+          con.query("select* from officer where email = (?)",[offemail],function(err,result,fields){
             if(err) throw err;
-            con.query("select * from complaint_assignment natural join officer natural join complaint natural join track where officer_id=(?)",[result2[0].officer_id],function(err,result1,fields){
-                res.render("officerHome",{result1});
+            con.query("select * from complaint_assignment natural join officer natural join complaint natural join track where officer_id=(?)",[result[0].officer_id],function(err,result1,fields){
+                res.render("officerHome",{encoding,result,result1});
             })
           })
             
@@ -283,11 +293,11 @@ app.post("/register",(req,res)=>{
     var com_id= req.body.com_id;
         console.log(com_id);
    var one=1;
-        con.query("update  track set solved=(?) where complaint_id=(?)", [one,com_id], function(err, result, fields){
-            con.query("select* from officer where email = (?)",[offemail],function(err,result2,fields){
+        con.query("update  track set solved=(?) where complaint_id=(?)", [one,com_id], function(err, result2, fields){
+            con.query("select* from officer where email = (?)",[offemail],function(err,result,fields){
                 if(err) throw err;
-                con.query("select * from complaint_assignment natural join officer natural join complaint natural join track where officer_id=(?)",[result2[0].officer_id],function(err,result1,fields){
-                    res.render("officerHome",{result1});
+                con.query("select * from complaint_assignment natural join officer natural join complaint natural join track where officer_id=(?)",[result[0].officer_id],function(err,result1,fields){
+                    res.render("officerHome",{emcoding,result,result1});
                 })
               })
         });
@@ -325,10 +335,10 @@ app.post("/register",(req,res)=>{
         con.query('update  complaint_assignment set  officer_id=(?) where complaint_id =(?)',[officer_temp,com_id], (err, result) =>{
             if(err) throw err;
             console.log("complaint tranfererd");
-            con.query("select* from officer where email = (?)",[offemail],function(err,result2,fields){
+            con.query("select* from officer where email = (?)",[offemail],function(err,result,fields){
                 if(err) throw err;
-                con.query("select * from complaint_assignment natural join officer natural join complaint natural join track where officer_id=(?)",[result2[0].officer_id],function(err,result1,fields){
-                    res.render("officerHome",{result1});
+                con.query("select * from complaint_assignment natural join officer natural join complaint natural join track where officer_id=(?)",[result[0].officer_id],function(err,result1,fields){
+                    res.render("officerHome",{encoding,result,result1});
                 })
               })
         });
@@ -357,10 +367,10 @@ app.post("/register",(req,res)=>{
     con.query('update  complaint_assignment set  officer_id=(?) where complaint_id =(?)',[officer_temp,com_id], (err, result) =>{
         if(err) throw err;
         console.log("send to higher authority");
-        con.query("select* from officer where email = (?)",[offemail],function(err,result2,fields){
+        con.query("select* from officer where email = (?)",[offemail],function(err,result,fields){
             if(err) throw err;
-            con.query("select * from complaint_assignment natural join officer natural join complaint natural join track where officer_id=(?)",[result2[0].officer_id],function(err,result1,fields){
-                res.render("officerHome",{result1});
+            con.query("select * from complaint_assignment natural join officer natural join complaint natural join track where officer_id=(?)",[result[0].officer_id],function(err,result1,fields){
+                res.render("officerHome",{encoding,result, result1});
             })
           })
     });
@@ -368,10 +378,15 @@ app.post("/register",(req,res)=>{
 })
 
 
- app.post("/officer_register",(req,res)=>{
+ app.get("/officer_register",(req,res)=>{
 
+    con.query("SELECT * from officer where email = (?)",[offemail], function(err, result1, fields){
+        if(err) throw err;
+        con.query("SELECT * from department", function(err, result, fields){
+            res.render("officer_register.ejs",{encoding, result, result1});
+        })
+   })
    
-   res.render(officer_register.ejs);
    
     })
  app.post("/officer_register_confirm",(req,res)=>{
@@ -386,6 +401,13 @@ con.query('INSERT INTO officer (officer_id,officer_name,lvl,department,block_id,
     results) => {
         if (error)  throw error;
         });
+    
+        con.query("select* from officer where email = (?)",[offemail],function(err,result,fields){
+            if(err) throw err;
+            con.query("select * from complaint_assignment natural join officer natural join complaint natural join track where officer_id=(?)",[result[0].officer_id],function(err,result1,fields){
+                res.render("officerHome.ejs",{encoding,result,result1});
+            })
+          })
 
 
  })

@@ -8,6 +8,8 @@ const app = express();
 const port =4000;
 const hbs = require("ejs")
 const alert =  require("alert");
+const encoding = ["Tehsildar","Block Development Officer", "District Collector", "Commisioner", "District Development Officer", "Secretory"];
+
 
 module.exports = function(con,email, password,res){
     con.connect(function(err){
@@ -27,7 +29,7 @@ module.exports = function(con,email, password,res){
              if(result[0].pass==password){
                 con.query("select * from complaint_assignment natural join officer natural join complaint natural join track where officer_id=(?) ", [result[0].officer_id], function(err, result1, fields){
                     console.log(result1);
-                    res.render("officerHome",{result1});
+                    res.render("officerHome",{encoding,result, result1});
 
                 });
 

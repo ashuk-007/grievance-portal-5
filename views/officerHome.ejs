@@ -41,22 +41,24 @@
                 </ul>
             </div>
         </nav>
-        <!-- <div class="row">
+        <div class="row">
             <div class="col1">
                 <div class="box1">
-                    <H1>Solutions To All Your Grievances <br> In One Place.</H1>
-                    <p>We will take your grievance to the desk of concerned officer and see it resolved.</p>
-                    <button type="button" class="learnMore">Learn More</button>
+                    <H1><%= result[0].officer_name%> <br><%= encoding[result[0].lvl - 1]%></H1>
+                    <% if(result[0].lvl > 1){%>
+                        <p>Click here to add a new officer</p>
+                        <a href="officer_register"><button type="button" class="learnMore">Add Officer</button></a>
+                    <%}%>    
                 </div>
-                <a href="postgrievanceRural"><div class="box2">
+                <!-- <a href="postgrievanceRural"><div class="box2">
                     <p>Post a new Grievance</p>
                     <img src="../static/images/addGrievance.png">
                 </div></a>
                 <a href="trackgrievance"><div class="box3">
                     <p>Track Grievance</p>
                     <img src="../static/images/trackGrievance.png">
-                </div></a>
-            </div> -->
+                </div></a> -->
+            </div>
             <div class="col2">
                 <h4>YOUR DASHBOARD</h4>
                 <div class="content">
