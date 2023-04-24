@@ -51,6 +51,12 @@
                 <h4>View Uploaded Files:</h4>
                 <div class="space2"></div>
                 <h4>Time left:</h4>
+                <div class="space2"></div>
+                <h4>User Responses</h4>
+                <div class="space2"></div>
+                <div class="field" id="widefield">Sample User Response 1</div>
+                <div class="space2"></div>
+                <div class="field" id="widefield">Sample User Response 2</div>
             </div>
             <div class="col2">
                 <div class="bigspace"></div>
@@ -94,6 +100,12 @@
             <input type="hidden" id="custId" name="block_id" value=<%=result1[0].block_id %>>
 
             <input type="submit" name="send_to_higher" id="register" value="Send to Higher authority">
+        </form>
+        <div class="space"></div>
+        <form action="officer_response" method="post">
+            <input type = "text" name="response" placeholder="Enter response" required>
+            <div class="space"></div>
+            <input type="submit" name="officer_response" value="Send">
         </form>
     </div>
   </div>

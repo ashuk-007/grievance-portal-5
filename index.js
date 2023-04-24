@@ -16,7 +16,7 @@ const griever = require('./addComplaint')
 var offemail;
 var date;
 let date_time = new Date();
-const encoding = ["Tehsildar","Block Development Officer", "District Collector", "Commisioner", "District Development Officer", "Secretory"];
+const encoding = ["Rural Development Officer","Block Development Officer", "District Collector", "Commisioner", "District Development Officer", "Secretory"];
 
 var con = mysql.createConnection({
     host : "localhost",
@@ -293,7 +293,7 @@ app.post("/register",(req,res)=>{
             con.query("select* from officer where email = (?)",[offemail],function(err,result,fields){
                 if(err) throw err;
                 con.query("select * from complaint_assignment natural join officer natural join complaint natural join track where officer_id=(?)",[result[0].officer_id],function(err,result1,fields){
-                    res.render("officerHome",{emcoding,result,result1});
+                    res.render("officerHome",{encoding,result,result1});
                 })
               })
         });
