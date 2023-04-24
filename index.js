@@ -408,6 +408,16 @@ con.query('INSERT INTO officer (officer_id,officer_name,lvl,department,block_id,
 
  })
 
+ app.post("/officer_response", (req, res)=>{
+    var response = req.body.response;
+
+    con.query('SELECT officer_response from track where complaint_id = (?)', [complaint_id])
+
+    con.query('INSERT INTO track (officer_response) VALUES (?) where complaint_id = (?)', [response, complaint_id], (error, results)=>{
+        if(error) throw error;
+    });
+ })
+
 
 app.listen(port,()=>{
 
