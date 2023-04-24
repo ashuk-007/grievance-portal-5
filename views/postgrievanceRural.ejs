@@ -69,17 +69,14 @@
           <!-- <input type="file" name="upload" id="upload" placeholder="Upload Files" required> -->
           <div class="space"></div>
           <div class="title">Address Details</div>
+          <div class="autocomplete-container" id="autocomplete-container"></div>
+
           <div class="space"></div>
           <h4>State</h4>
           <input type="text" name="state" placeholder="Select State" required>
           <div class="space"></div>
-          <h4>Tehsil</h4>
-          <input type="text" name="tehsil" placeholder="Select Tehsil" required>
-          <div class="space"></div>
-          <h4 id="address">Address</h4>
-          <input type="text" name="panchayat" placeholder="Enter Address" required>
-          </div>
-        
+         
+         
         <div class="col2">
           <div class="space"></div>
           <!-- <h4>Last Name</h4>
@@ -110,13 +107,11 @@
           <input type="file" name="uploadImage" id="upload2" placeholder="Upload Files">
           <div class="space"><br></div>
           <h4>District</h4>
-          <input type="text" name="district" placeholder="Select District" required>
+          <input type="text" id="district"name="district" placeholder="Select District" required>
           <div class="space"></div>
-          <h4>Block</h4>
-          <input type="text" name="block" placeholder="Select Block" required>
-          <div class="space"></div>
+    
           <h4>Pincode</h4>
-          <input type="number" name="pincode" placeholder="Enter Pincode" required>
+          <input type="text" id="pincode" name="pincode" placeholder="Enter Pincode" required>
           <div class="space"></div>
           <input type="submit" name="register" id="register" value="Post Grievance">
         </div>
@@ -124,5 +119,7 @@
     </form>
   </div>
   </body>
+  <script src="../static/scripts/index.js" defer></script>
+
 </html>
 

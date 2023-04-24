@@ -21,7 +21,7 @@ const encoding = ["Tehsildar","Block Development Officer", "District Collector",
 var con = mysql.createConnection({
     host : "localhost",
     user : "root",
-   password : "India@no.1",
+   password : "tanish@0601",
     database  : "gri"
 });
 app.use(express.json());
