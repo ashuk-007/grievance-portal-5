@@ -21,7 +21,7 @@ const encoding = ["Rural Development Officer","Block Development Officer", "Dist
 var con = mysql.createConnection({
     host : "localhost",
     user : "root",
-   password : "India@no.1",
+   password : "tanish@0601",
     database  : "gri"
 });
 app.use(express.json());
@@ -79,7 +79,7 @@ app.get("/postgrievanceRural", (req,res)=>{
                     console.log("PROBLEM");
                     throw err;
                 }
-                con.query("SELECT * from department natural", function(err, result, fields){
+                con.query("SELECT * from department", function(err, result, fields){
                     if(err) throw err;
                     con.query("SELECT * from gri_type", function(err, result2, fields){
                         console.log("asking for post complain , deppt list send succesfully ");
@@ -97,11 +97,12 @@ app.get("/trackgrievance", (req,res)=>{
 
 app.post("/track",(req,res)=>{
     var com_id = req.body.com_id2;
-    con.query("select * from complaint inner join track on complaint.complaint_id = track.complaint_id inner join department on complaint.department_id = department.department_id where complaint.complaint_id = (?)",[com_id],function(err, result, fields){
+    con.query("select * from complaint natural join track natural join department  where complaint_id = (?)",[com_id],function(err, result, fields){
         if(err) throw err;
         console.log(result);
+        console.log(result);
         if(result.length != 0){
-            res.render("trackgrievance.ejs", {result});
+            res.render("trackgrievance", {result});
         }else{
             alert("Invalid Grievance number.");
         }
@@ -313,6 +314,11 @@ app.post("/register",(req,res)=>{
     var com_id= req.body.com_id;
     var lvl = req.body.level;
     console.log("lvlv of ofif",com_id);
+
+
+
+
+
     con.query("select * from department ", function(err, result, fields){
         if(err) throw err;
         console.log(result);
@@ -327,21 +333,45 @@ app.post("/register",(req,res)=>{
     var department = req.body.department;
     var level = req.body.level;
     console.log("com_id = ",com_id);
+    con.query("select * from track where complaint_id=(?) ",[com_id],function(err,result1,fields){
+        var prev  = result1[0].user_response;
+        prev +="#";
+        prev+="complained is tranferred to ";
+        prev+= department;
+       con.query("update track set seen = (?),inprogrss=(?), forwarded=(?),solved =(?), transfer_counter=(?),level_update_cnt=(?),user_response=(?) ",[0,0,0,0,1,0,prev],function(err,result2,fields){
+     
+        
+     });
+   
+ });
+ 
+
     con.query('SELECT officer_id FROM officer where block_id = (?) AND department = (?) AND lvl = (?)',[block_id, department, level], (err, result) =>{
         if(err) throw err;
         officer_temp = result[0].officer_id;
         console.log(result);
-        con.query('update  complaint_assignment set  officer_id=(?) where complaint_id =(?)',[officer_temp,com_id], (err, result) =>{
+        
+        con.query('SELECT * from department where department_name = (?)',[ department], (err, result4,fields) =>{
+            if(err) throw err;
+console.log(result4[0].department_id);
+        con.query('update  complaint_assignment set  officer_id=(?)  where complaint_id =(?)',[officer_temp,com_id], (err, result,fields) =>{
             if(err) throw err;
             console.log("complaint tranfererd");
+
+            con.query('update  complaint set  department_id=(?)  where complaint_id =(?)',[result4[0].department_id,com_id], (err, result,fields) =>{
+                if(err) throw err;
+                console.log("complaint tranfererd");
+                
             con.query("select* from officer where email = (?)",[offemail],function(err,result,fields){
                 if(err) throw err;
                 con.query("select * from complaint_assignment natural join officer natural join complaint natural join track where officer_id=(?)",[result[0].officer_id],function(err,result1,fields){
                     res.render("officerHome",{encoding,result,result1});
                 })
               })
+            });
         });
     });
+});
   
  })
 
