@@ -21,7 +21,7 @@ const encoding = ["Rural Development Officer","Block Development Officer", "Dist
 var con = mysql.createConnection({
     host : "localhost",
     user : "root",
-   password : "MySQL@123",
+   password : "India@no.1",
     database  : "gri"
 });
 app.use(express.json());

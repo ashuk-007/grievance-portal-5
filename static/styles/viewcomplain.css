@@ -255,6 +255,10 @@ html, body{
     background-image: linear-gradient(to right, #6780F0,#38B6FF);
   }
 
+  .container #right #tallField{
+    height: 90px;
+  }
+
 .container .input-box .col2 .statusbar .statusbarcontainer .circle3{
   position: absolute;
   height: 30px;

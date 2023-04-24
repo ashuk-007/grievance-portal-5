@@ -81,8 +81,11 @@ module.exports = async function(con, useremail, date, department, details, state
           }, 5000);
           let officer_temp, officer_level;
           setTimeout(() => {
-            con.query('SELECT officer_id FROM officer where block_id = (?) AND department = (?) AND lvl = (?)',[block_temp, department, '1'], (error, result) =>{
+            con.query('SELECT * FROM officer where block_id = (?) AND department = (?) AND lvl = (?)',[block_temp, department, '1'], (error, result) =>{
                 if(err) throw err;
+                console.log(block_temp);
+                console.log(department);
+                console.log(result);
                 officer_temp = result[0].officer_id;
                 console.log(result);
             });
