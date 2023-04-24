@@ -79,10 +79,13 @@ app.get("/postgrievanceRural", (req,res)=>{
                     console.log("PROBLEM");
                     throw err;
                 }
-                con.query("SELECT * from department", function(err, result, fields){
+                con.query("SELECT * from department natural", function(err, result, fields){
                     if(err) throw err;
-                    console.log("asking for post complain , deppt list send succesfully ");
-                    res.render("postgrievanceRural.ejs",{result});
+                    con.query("SELECT * from gri_type", function(err, result2, fields){
+                        console.log("asking for post complain , deppt list send succesfully ");
+                    res.render("postgrievanceRural.ejs",{result,result2});
+                    })
+                    
                 })
             })
 
