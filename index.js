@@ -21,7 +21,7 @@ const encoding = ["Rural Development Officer","Block Development Officer", "Dist
 var con = mysql.createConnection({
     host : "localhost",
     user : "root",
-   password : "tanish@0601",
+   password : "India@no.1",
     database  : "gri"
 });
 app.use(express.json());
@@ -102,7 +102,9 @@ app.post("/track",(req,res)=>{
         console.log(result);
         console.log(result);
         if(result.length != 0){
-            res.render("trackgrievance", {result});
+            con.query("SELECT * from complaint_assignment natural join officer where complaint_id = (?)",[com_id], function(err, result2, fields){
+                res.render("trackgrievance.ejs", {result,result2,encoding});
+            })
         }else{
             alert("Invalid Grievance number.");
         }
@@ -114,7 +116,10 @@ app.post("/track2",(req,res)=>{
     con.query("select * from complaint inner join track on complaint.complaint_id = track.complaint_id inner join department on complaint.department_id = department.department_id where complaint.complaint_id = (?)",[com_id],function(err, result, fields){
         if(err) throw err;
         console.log(result);
-        res.render("trackgrievance.ejs", {result});
+        con.query("SELECT * from complaint_assignment natural join officer where complaint_id = (?)",[com_id], function(err, result2, fields){
+            res.render("trackgrievance.ejs", {result,result2,encoding});
+        })
+        
     })
 })
 
@@ -338,6 +343,7 @@ app.post("/register",(req,res)=>{
         prev +="#";
         prev+="complained is tranferred to ";
         prev+= department;
+<<<<<<< HEAD
        con.query("update track set seen = (?),inprogrss=(?), forwarded=(?),solved =(?), transfer_counter=(?),level_update_cnt=(?),officer_response=(?) ",[0,0,0,0,1,0,prev],function(err,result2,fields){
         if (err) throw err;
         con.query('SELECT officer_id FROM officer where block_id = (?) AND department = (?) AND lvl = (?)',[block_id, department, level], (err, result) =>{
@@ -367,6 +373,11 @@ app.post("/register",(req,res)=>{
         });
     });
 
+=======
+        console.log(prev);
+       con.query("update track set seen = (?),inprogrss=(?), forwarded=(?),solved =(?), transfer_counter=(?),level_update_cnt=(?),officer_response=(?) ",[0,0,0,0,1,0,prev],function(err,result2,fields){
+     
+>>>>>>> origin
         
      });
    
@@ -483,7 +494,10 @@ con.query('INSERT INTO officer (officer_id,officer_name,lvl,department,block_id,
         con.query("select * from complaint inner join track on complaint.complaint_id = track.complaint_id inner join department on complaint.department_id = department.department_id where complaint.complaint_id = (?)",[complaint_id],function(err, result, fields){
             if(err) throw err;
             console.log(result);
-            res.render("trackgrievance.ejs", {result});
+            con.query("SELECT * from complaint_assignment natural join officer where complaint_id = (?)",[complaint_id], function(err, result2, fields){
+                res.render("trackgrievance.ejs", {result,result2,encoding});
+            })
+            
         })
     })
  })
