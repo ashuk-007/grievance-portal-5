@@ -334,44 +334,46 @@ app.post("/register",(req,res)=>{
     var level = req.body.level;
     console.log("com_id = ",com_id);
     con.query("select * from track where complaint_id=(?) ",[com_id],function(err,result1,fields){
-        var prev  = result1[0].user_response;
+        var prev  = result1[0].officer_response;
         prev +="#";
         prev+="complained is tranferred to ";
         prev+= department;
-       con.query("update track set seen = (?),inprogrss=(?), forwarded=(?),solved =(?), transfer_counter=(?),level_update_cnt=(?),user_response=(?) ",[0,0,0,0,1,0,prev],function(err,result2,fields){
-     
+       con.query("update track set seen = (?),inprogrss=(?), forwarded=(?),solved =(?), transfer_counter=(?),level_update_cnt=(?),officer_response=(?) ",[0,0,0,0,1,0,prev],function(err,result2,fields){
+        if (err) throw err;
+        con.query('SELECT officer_id FROM officer where block_id = (?) AND department = (?) AND lvl = (?)',[block_id, department, level], (err, result) =>{
+            if(err) throw err;
+            officer_temp = result[0].officer_id;
+            console.log(result);
+            
+            con.query('SELECT * from department where department_name = (?)',[ department], (err, result4,fields) =>{
+                if(err) throw err;
+    console.log(result4[0].department_id);
+            con.query('update  complaint_assignment set  officer_id=(?)  where complaint_id =(?)',[officer_temp,com_id], (err, result,fields) =>{
+                if(err) throw err;
+                console.log("complaint tranfererd");
+    
+                con.query('update  complaint set  department_id=(?)  where complaint_id =(?)',[result4[0].department_id,com_id], (err, result,fields) =>{
+                    if(err) throw err;
+                    console.log("complaint tranfererd");
+                    
+                con.query("select* from officer where email = (?)",[offemail],function(err,result,fields){
+                    if(err) throw err;
+                    con.query("select * from complaint_assignment natural join officer natural join complaint natural join track where officer_id=(?)",[result[0].officer_id],function(err,result1,fields){
+                        res.render("officerHome",{encoding,result,result1});
+                    })
+                  })
+                });
+            });
+        });
+    });
+
         
      });
    
  });
  
 
-    con.query('SELECT officer_id FROM officer where block_id = (?) AND department = (?) AND lvl = (?)',[block_id, department, level], (err, result) =>{
-        if(err) throw err;
-        officer_temp = result[0].officer_id;
-        console.log(result);
-        
-        con.query('SELECT * from department where department_name = (?)',[ department], (err, result4,fields) =>{
-            if(err) throw err;
-console.log(result4[0].department_id);
-        con.query('update  complaint_assignment set  officer_id=(?)  where complaint_id =(?)',[officer_temp,com_id], (err, result,fields) =>{
-            if(err) throw err;
-            console.log("complaint tranfererd");
-
-            con.query('update  complaint set  department_id=(?)  where complaint_id =(?)',[result4[0].department_id,com_id], (err, result,fields) =>{
-                if(err) throw err;
-                console.log("complaint tranfererd");
-                
-            con.query("select* from officer where email = (?)",[offemail],function(err,result,fields){
-                if(err) throw err;
-                con.query("select * from complaint_assignment natural join officer natural join complaint natural join track where officer_id=(?)",[result[0].officer_id],function(err,result1,fields){
-                    res.render("officerHome",{encoding,result,result1});
-                })
-              })
-            });
-        });
-    });
-});
+   
   
  })
 
