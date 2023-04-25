@@ -21,7 +21,7 @@ const encoding = ["Rural Development Officer","Block Development Officer", "Dist
 var con = mysql.createConnection({
     host : "localhost",
     user : "root",
-   password : "India@no.1",
+   password : "tanish@0601",
     database  : "gri"
 });
 app.use(express.json());
@@ -343,8 +343,7 @@ app.post("/register",(req,res)=>{
         prev +="#";
         prev+="complained is tranferred to ";
         prev+= department;
-<<<<<<< HEAD
-       con.query("update track set seen = (?),inprogrss=(?), forwarded=(?),solved =(?), transfer_counter=(?),level_update_cnt=(?),officer_response=(?) ",[0,0,0,0,1,0,prev],function(err,result2,fields){
+       con.query("update track set seen = (?),inprogress=(?), forwarded=(?),solved =(?), transfer_counter=(?),level_update_cnt=(?),officer_response=(?) ",[0,0,0,0,1,0,prev],function(err,result2,fields){
         if (err) throw err;
         con.query('SELECT officer_id FROM officer where block_id = (?) AND department = (?) AND lvl = (?)',[block_id, department, level], (err, result) =>{
             if(err) throw err;
@@ -373,11 +372,8 @@ app.post("/register",(req,res)=>{
         });
     });
 
-=======
         console.log(prev);
-       con.query("update track set seen = (?),inprogrss=(?), forwarded=(?),solved =(?), transfer_counter=(?),level_update_cnt=(?),officer_response=(?) ",[0,0,0,0,1,0,prev],function(err,result2,fields){
      
->>>>>>> origin
         
      });
    
@@ -386,7 +382,7 @@ app.post("/register",(req,res)=>{
 
    
   
- })
+ });
 
  app.post("/send_to_higher", (req,res)=>{
   var level = req.body.level.toString();
