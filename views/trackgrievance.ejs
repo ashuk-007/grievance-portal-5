@@ -9,6 +9,7 @@
     <script src="../static/scripts/navbar.js" defer></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../static/scripts/feedback.js" defer></script>
     <script src="../static/scripts/statusbar.js" defer></script>
   </head>
   <body>
@@ -34,6 +35,75 @@
   <div class="invis"><%=result[0].solved%></div>
   <div class="invis"><%=result[0].seen%></div>
   <div class="container">
+    <div class="blocker" onclick="closeFeedback()"></div>
+    <div class="feedback_window">
+        <div class="title1">Feedback</div>
+        <div class="formcontainer">
+            <div class="left">
+                <h4>Complain satisfaction rating: </h4>
+                <div class="space"></div>
+                <h4>Officer satisfaction rating: </h4>
+                <div class="space"></div>
+                <h4>Overall satisfaction rating: </h4>
+                <div class="space"></div>
+                <h4>Other Feedback</h4>
+            </div>
+            <form action="#" method="post">
+                <div class="right">
+                    <div class="space05"></div>
+                    <div id="container1">
+                        <div class="rate1">
+                            <input type="radio" id="star15" name="rate1" value="5" />
+                            <label for="star15" title="text">5 stars</label>
+                            <input type="radio" id="star14" name="rate1" value="4" />
+                            <label for="star14" title="text">4 stars</label>
+                            <input type="radio" id="star13" name="rate1" value="3" />
+                            <label for="star13" title="text">3 stars</label>
+                            <input type="radio" id="star12" name="rate1" value="2" />
+                            <label for="star12" title="text">2 stars</label>
+                            <input type="radio" id="star11" name="rate1" value="1" />
+                            <label for="star11" title="text">1 star</label>
+                          </div>
+                    </div>
+                    <div class="space05"></div>
+                    <div id="container2">
+                        <div class="rate2">
+                            <input type="radio" id="star25" name="rate2" value="5" />
+                            <label for="star25" title="text">5 stars</label>
+                            <input type="radio" id="star24" name="rate2" value="4" />
+                            <label for="star24" title="text">4 stars</label>
+                            <input type="radio" id="star23" name="rate2" value="3" />
+                            <label for="star23" title="text">3 stars</label>
+                            <input type="radio" id="star22" name="rate2" value="2" />
+                            <label for="star22" title="text">2 stars</label>
+                            <input type="radio" id="star21" name="rate2" value="1" />
+                            <label for="star21" title="text">1 star</label>
+                          </div>
+                    </div>
+                    <div class="space05"></div>
+                    <div id="container3">
+                        <div class="rate3">
+                            <input type="radio" id="star35" name="rate3" value="5" />
+                            <label for="star35" title="text">5 stars</label>
+                            <input type="radio" id="star34" name="rate3" value="4" />
+                            <label for="star34" title="text">4 stars</label>
+                            <input type="radio" id="star33" name="rate3" value="3" />
+                            <label for="star33" title="text">3 stars</label>
+                            <input type="radio" id="star32" name="rate3" value="2" />
+                            <label for="star32" title="text">2 stars</label>
+                            <input type="radio" id="star31" name="rate3" value="1" />
+                            <label for="star31" title="text">1 star</label>
+                          </div>
+                    </div>
+                    <div class="space"></div>
+                    <input type="text" id="textinput" name="feedback_text" placeholder="500 characters">
+                    <div class="space05"></div>
+                    <input type="submit" id="submit" value="Submit">
+                </div>
+            </form>
+        </div>
+        
+    </div>
     <div id="left">
         <div class="title1">Grievance Status</div>
         <div class="input-box">
@@ -109,6 +179,8 @@
             <div class="space"></div>
             <input type="submit" name="submit" value="Send">
         </form> 
+        <div class="space"></div>
+        <button class="feedback" onclick="openFeedback()">Submit a feedback</button>
     </div>
   </div>
   </body>
