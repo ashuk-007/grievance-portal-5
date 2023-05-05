@@ -14,6 +14,7 @@ var useremail;
 // const { logim} = require('./login')
 const griever = require('./addComplaint')
 var offemail;
+var fin_comp;
 var date;
 let date_time = new Date();
 const encoding = ["Rural Development Officer","Block Development Officer", "District Collector", "Commisioner", "District Development Officer", "Secretory"];
@@ -21,7 +22,7 @@ const encoding = ["Rural Development Officer","Block Development Officer", "Dist
 var con = mysql.createConnection({
     host : "localhost",
     user : "root",
-   password : "India@no.1",
+   password : "MySQL@123",
     database  : "gri"
 });
 app.use(express.json());
@@ -49,6 +50,7 @@ app.get("/register",(req,res)=>{
 
     res.render("register.ejs");
 })
+
 app.get("/userHome",(req,res)=>{
     console.log("user enter in userHome");
     con.connect(function(err){
@@ -117,9 +119,33 @@ app.post("/track2",(req,res)=>{
         if(err) throw err;
         console.log(result);
         con.query("SELECT * from complaint_assignment natural join officer where complaint_id = (?)",[com_id], function(err, result2, fields){
+            fin_comp = com_id;
             res.render("trackgrievance.ejs", {result,result2,encoding});
         })
         
+    })
+})
+
+app.post("/final_feedback", (req, res)=>{
+    var c_rate = req.body.rate1;
+    var o_rate = req.body.rate2;
+    var s_rate = req.body.rate3;
+    var feedback = req.body.feedback_text;
+
+    var temp = (0.2*c_rate) + (0.3*o_rate) + (0.5*s_rate);
+    console.log(fin_comp);
+    con.query("UPDATE complaint SET rating = (?), feedback=(?) where complaint_id = (?)", [temp, feedback, fin_comp], function(err, result, fields){
+        if(err) throw err;
+        console.log(temp);
+        console.log(feedback);
+        con.query("select * from complaint inner join track on complaint.complaint_id = track.complaint_id inner join department on complaint.department_id = department.department_id where complaint.complaint_id = (?)",[fin_comp],function(err, result, fields){
+            if(err) throw err;
+            console.log(result);
+            con.query("SELECT * from complaint_assignment natural join officer where complaint_id = (?)",[fin_comp], function(err, result2, fields){
+                res.render("trackgrievance.ejs", {result,result2,encoding});
+            })
+            
+        })
     })
 })
 
