@@ -72,22 +72,20 @@
             <div class="col2">
                 <h4>YOUR DASHBOARD</h4>
                 <div class="content">
-                    <div class="filters">
+                    <!-- <div class="filters">
                         <select>
                             <option value="status">Status</option>
                             <option value="pending">Pending</option>
                             <option value="solved">Solved</option>
                         </select>
-                        <input type="text" name="search" placeholder="Search">
-                    </div>
+                    </div> -->
                     <table class="table">
                         <tr class="toprow">
                             <td width="22%"><p>Grievance Number</p></td>
                             <td width="10%"><p>Date Registered</p></td>
-                            <td width="30%"><p>Department Name</p></td>
-                            <td width="10%"><p>Status</p></td>
-                            <td width="15%"><p>Track Grievance</p></td>
-                            <td width="15%"><p>Submit Feedback</p></td>
+                            <td width="30%"><p>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspDepartment Name</p></td>
+                            <td width="15%"><p>Status</p></td>
+                            <td width="20%"><p>Track Grievance</p></td>
                         </tr>
                         <form action="track2" method="post" id="myform">
                             <input type="text" name="com_id" class="invis">
@@ -95,14 +93,13 @@
                             <tr class="data" id=<%= i%>>
                                 <td width="18%"><p class="greivanceNumber"><%= result1[i].complaint_id%></p></td>
                                 <td width="16%"><p id="dateRegistered"><%= result1[i].complaint_date%></p></td>
-                                <td width="25%"><p id="department"><%= result1[i].department_name%></p></td>
+                                <td width="30%"><p id="department"><%= result1[i].department_name%></p></td>
                                 <% if(result1[i].solved == 1){ %>
-                                    <td width="12%"><button type="button" class="status">Solved</button></td>
+                                    <td width="15%"><button type="button" class="status">Solved</button></td>
                                 <%}else{ %>
-                                    <td width="12%"><button type="button" class="status">Pending</button></td>
+                                    <td width="15%"><button type="button" class="status">Pending</button></td>
                                 <%} %>                                
                                 <td width="15%"><a onclick="check(this.parentNode.parentNode)"><img src="../static/images/trackGrievance.png"></a></td>
-                                <td width="10%"><a a="#"><img src="../static/images/feedback.png"></a></td>
                             </tr>
                         <% } %>
                         </form>

@@ -180,7 +180,10 @@
             <input type="submit" name="submit" value="Send">
         </form> 
         <div class="space"></div>
-        <button class="feedback" onclick="openFeedback()">Submit a feedback</button>
+        <% if(result[0].solved == 1){ %>
+            <button class="feedback" onclick="openFeedback()">Submit a feedback</button>
+        <% } %>
+        
     </div>
   </div>
   </body>
