@@ -34,6 +34,8 @@ app.get("/",(req,res)=>{
     res.render("index.ejs");
 });
 
+
+
 app.get("/userLogin",(req,res)=>{
     console.log("asking for userlogin");
 
@@ -72,6 +74,13 @@ app.get("/userHome",(req,res)=>{
 
 
     res.render("userHome.ejs");
+})
+
+app.get("/view_officer",(req,res) =>{
+    con.query("SELECT * from officer", function(err, result1, fields){
+        if(err) throw err;
+        res.render("view_officer.ejs",{result1});
+    })
 })
 
 

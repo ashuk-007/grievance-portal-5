@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="..\static\styles\navbar.css">
+        <link rel = "stylesheet" href="..\static/styles/userHome.css">
+        <script src="../static/scripts/navbar.js" defer></script>
+        <script src="../static/scripts/userHome.js" defer></script>
+        <title>Grievance Portal</title>
+    </head>
+
+    <body>
+        <nav class="navbar">
+            <div class="logo">
+                <img src="..\static/images/Logo2.png">
+                <p1>Grievance &nbsp</p1> <p2>Portal</p2>
+            </div>
+            <a href="#" class="toggle">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </a>
+            <div class="navbar-links">
+                <ul>
+                    <li><a href="userLogin">User Login</a></li>
+                    <li><a href="officerlogin.ejs">Officer Login</a></li>
+                    <li><a href="index">Home</a></li>
+                </ul>
+            </div>
+        </nav>
+        <div class="row">
+            <!-- <div class="popup2">
+                <div class="title">Send Feedback</div>
+                <div class="space"></div>
+                <form action="user_response" method="post">
+                    <h4>Message</h4>
+                    <div class="space"></div>
+                    <input type="hidden" name="com_id_popup">
+                    <input type="text" name ="response"placeholder="Enter Response" required>
+                    <div class="space"></div>
+                    <input type="submit" name="" value="Send">
+                </form>
+            </div> -->
+            <div class="col2">
+                <h4>Officer List</h4>
+                <div class="content">
+                    <!-- <div class="filters">
+                        <select>
+                            <option value="status">Status</option>
+                            <option value="pending">Pending</option>
+                            <option value="solved">Solved</option>
+                        </select>
+                    </div> -->
+                    <table class="table">
+                        <tr class="toprow">
+                            <td width="150px"><p>Officer ID</p></td>
+                            <td width="150px"><p>Officer Name</p></td>
+                            <td width="250px"><p>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspDepartment Name</p></td>
+                            <td width="250px"><p>Block ID</p></td>
+                            <td width="50px"><p>Score</p></td>
+                            <td width="350px"><p>Total Complaints</p></td>
+                        </tr>
+
+                        <% for(var i = 0; i<result1.length; i++){ %>
+                            <tr class="data" id=<%= i%>>
+                                <td width="150px"><p class="greivanceNumber"><%= result1[i].officer_id%></p></td>
+                                <td width="350px"><p id="dateRegistered"><%= result1[i].officer_name%></p></td>
+                                <td width="400px"><p id="department"><%= result1[i].department%></p></td>
+                                <td width="80px"><p id="block"><%= result1[i].block_id%></p></td>                         
+                                <td width="30%"><p id="score">3.5</p></td>
+                                <td width = "30%"><p id="total">10</p></td>
+                            </tr>
+                        <% } %>
+                        </table>        
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
