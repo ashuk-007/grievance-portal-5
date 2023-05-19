@@ -22,7 +22,7 @@ const encoding = ["Rural Development Officer","Block Development Officer", "Dist
 var con = mysql.createConnection({
     host : "localhost",
     user : "root",
-   password : "India@no.1",
+   password : "MySQL@123",
     database  : "gri"
 });
 app.use(express.json());
@@ -147,14 +147,37 @@ app.post("/final_feedback", (req, res)=>{
         if(err) throw err;
         console.log(temp);
         console.log(feedback);
-        con.query("select * from complaint inner join track on complaint.complaint_id = track.complaint_id inner join department on complaint.department_id = department.department_id where complaint.complaint_id = (?)",[fin_comp],function(err, result, fields){
+        var officer_comp_id;
+        con.query("SELECT * from complaint_assignment where complaint_id = (?)", [fin_comp], function(err, results, fields){
             if(err) throw err;
-            console.log(result);
-            con.query("SELECT * from complaint_assignment natural join officer where complaint_id = (?)",[fin_comp], function(err, result2, fields){
-                res.render("trackgrievance.ejs", {result,result2,encoding});
+            officer_comp_id = results[0].officer_id;
+
+            con.query("SELECT * from officer where officer_id = (?)", [officer_comp_id], function(err, result1, fields){
+                if(err) throw err;
+                var prevComp = result1[0].complaint_counter;
+                var prevRating =result1[0].score;
+                var newComp = prevComp + 1;
+                var newRating = ((prevRating*prevComp) + temp)/newComp;
+
+                console.log(newRating);
+                console.log(newComp);
+                console.log(officer_comp_id);
+    
+                con.query("UPDATE officer SET score = (?), complaint_counter = (?) where officer_id = (?)", [newRating, newComp, officer_comp_id], function(err, result, fields){
+                    if (err) throw err;
+    
+                    con.query("select * from complaint inner join track on complaint.complaint_id = track.complaint_id inner join department on complaint.department_id = department.department_id where complaint.complaint_id = (?)",[fin_comp],function(err, result, fields){
+                        if(err) throw err;
+                        console.log(result);
+                        con.query("SELECT * from complaint_assignment natural join officer where complaint_id = (?)",[fin_comp], function(err, result2, fields){
+                            res.render("trackgrievance.ejs", {result,result2,encoding});
+                        })
+                        
+                    })
+                })
             })
-            
         })
+        
     })
 })
 
@@ -218,6 +241,8 @@ app.post("/register",(req,res)=>{
             con.query("select * from complaint natural join track natural join department where person_id = (?)",[result[0].person_id], function(err, result1, fields){
                 if(err) throw err;
                 con.query("select * from department", function(err, result2, fields){
+                    console.log(result1);
+                    console.log("My msg");
                     if(err) throw err;
                     console.log(result2);
                     res.render("userHome.ejs",{result1,result2});
@@ -234,6 +259,7 @@ app.post("/register",(req,res)=>{
         if(err) throw err;
         con.query("select * from complaint_assignment natural join officer natural join complaint natural join track where officer_id=(?)",[result[0].officer_id],function(err,result1,fields){
             res.render("officerHome.ejs",{encoding,result,result1});
+            console.log("Here" + result1);
         })
       })
  })
@@ -470,7 +496,8 @@ app.post("/register",(req,res)=>{
  var password = req.body.password;
  var officer_id = Math.floor(Math.random() * 100000);
  var lvl = req.body.level;
-con.query('INSERT INTO officer (officer_id,officer_name,lvl,department,block_id,email,pass) VALUES (?, ?, ?, ?, ?,?,?)', [officer_id,officer_name,lvl, department,block_id ,email,password],(error, 
+ var zero = 0;
+con.query('INSERT INTO officer (officer_id,officer_name,lvl,department,block_id,email,pass, score, complaint_counter) VALUES (?, ?, ?, ?, ?,?,?, ?, ?)', [officer_id,officer_name,lvl, department,block_id ,email,password,zero, zero],(error, 
     results) => {
         if (error)  throw error;
         });

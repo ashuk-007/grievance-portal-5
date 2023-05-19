@@ -69,8 +69,8 @@
                                 <td width="350px"><p id="dateRegistered"><%= result1[i].officer_name%></p></td>
                                 <td width="400px"><p id="department"><%= result1[i].department%></p></td>
                                 <td width="80px"><p id="block"><%= result1[i].block_id%></p></td>                         
-                                <td width="30%"><p id="score">3.5</p></td>
-                                <td width = "30%"><p id="total">10</p></td>
+                                <td width="30%"><p id="score"><%= result1[i].rating %></p></td>
+                                <td width = "30%"><p id="total"><%= result1[i].complaint_counter %></p></td>
                             </tr>
                         <% } %>
                         </table>        

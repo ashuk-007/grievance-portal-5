@@ -28,7 +28,8 @@ module.exports = function(con,email, password,res){
              if(result[0].pass==password){
                 con.query("select * from complaint_assignment natural join officer natural join complaint natural join track where officer_id=(?) ", [result[0].officer_id], function(err, result1, fields){
                     console.log(result1);
-                    res.render("officerHome",{encoding,result, result1});
+                    console.log("this query");
+                    res.render("officerHome.ejs",{encoding,result, result1});
 
                 });
 
