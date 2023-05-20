@@ -14,6 +14,16 @@
         event.preventDefault();
         window.location.assign("userHome");
       }
+
+      var er = <%=x%>
+   showAlert = function(err) {
+  alert('error: ' + err);
+}
+   if(er==false) 
+{  
+  showAlert("your credential is wrong");
+}
+
     </script>
   </head>
   <body>

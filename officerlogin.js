@@ -33,11 +33,19 @@ module.exports = function(con,email, password,res){
 
                 });
 
-                }}
+                }
+            else{               console.log("ITS query");
+
+                res.render("officerlogin.ejs",{x:"false"});
+            }
+            
+            
+            }
                 else{
+                    console.log("this NOT query");
 
                     
-                  res.render("officerlogin");
+                  res.render("officerlogin.ejs",{x: "false"});
             
             }
 

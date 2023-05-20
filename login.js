@@ -29,10 +29,17 @@ module.exports = function(con,email, password,res){
                         res.render("userHome.ejs",{result1});
                 })
                 
-                }}
+                }
+            
+            else{
+                res.render("userLogin.ejs",{x:"false"});
+
+            }
+            
+             }
                 else{
                     
-                  res.render("userlogin");
+                    res.render("userLogin.ejs",{x:"false"});
             
             }
 

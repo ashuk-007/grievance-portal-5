@@ -22,7 +22,7 @@ const encoding = ["Rural Development Officer","Block Development Officer", "Dist
 var con = mysql.createConnection({
     host : "localhost",
     user : "root",
-   password : "India@no.1",
+   password : "tanish@0601",
     database  : "gri"
 });
 app.use(express.json());
@@ -39,13 +39,13 @@ app.get("/",(req,res)=>{
 app.get("/userLogin",(req,res)=>{
     console.log("asking for userlogin");
 
-    res.render("userLogin.ejs");
+    res.render("userLogin.ejs",{x:"true"});
 })
 
 app.get("/officerlogin",(req,res)=>{
     console.log("asking for officerlogin");
 
-    res.render("officerLogin.ejs");
+    res.render("officerLogin.ejs",{x:"true"});
 })
 app.get("/register",(req,res)=>{
     console.log("asking for registration");
@@ -197,7 +197,8 @@ app.post("/register",(req,res)=>{
     var email = req.body.email;
     // useremail=email;
     inputs(con, name, password, aadharNumber, mobileNumber, ageNumber, gender, email)
-    res.render("userlogin");
+    res.render("userlogin.ejs",{x:"true"});
+
  });
 
  app.post("/userlogin", (req,res)=>{
