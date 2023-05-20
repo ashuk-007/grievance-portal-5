@@ -26,8 +26,6 @@
       </a>
       <div class="navbar-links">
           <ul>
-              <li><a href="#">About Us</a></li>
-              <li><a href="#">Support</a></li>
               <li><a href="index">Logout</a></li>
           </ul>
       </div>
@@ -54,7 +52,10 @@
                 <div class="space2"></div>
                 <h4>User Responses</h4>
                 <div class="space2"></div>
-                <div class="field" id="widefield"><%= result1[0].user_response%></div>
+                <% if(result1[0].user_response != "First"){ %>
+                    <div class="field" id="widefield"><%= result1[0].user_response%></div>
+                <% }%>
+                
             </div>
             <div class="col2">
                 <div class="bigspace"></div>

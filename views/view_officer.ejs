@@ -25,7 +25,7 @@
             <div class="navbar-links">
                 <ul>
                     <li><a href="userLogin">User Login</a></li>
-                    <li><a href="officerlogin.ejs">Officer Login</a></li>
+                    <li><a href="officerlogin">Officer Login</a></li>
                     <li><a href="index">Home</a></li>
                 </ul>
             </div>
@@ -63,7 +63,8 @@
                             <td width="350px"><p>Total Complaints</p></td>
                         </tr>
 
-                        <% for(var i = 0; i<result1.length; i++){ %>
+                        <% for(var i = 0; i<result1.length; i++){ 
+                            if(result1[i].score > 0 || result1[i].complaint_counter > 0){ %>
                             <tr class="data" id=<%= i%>>
                                 <td width="150px"><p class="greivanceNumber"><%= result1[i].officer_id%></p></td>
                                 <td width="350px"><p id="dateRegistered"><%= result1[i].officer_name%></p></td>
@@ -72,7 +73,8 @@
                                 <td width="30%"><p id="score"><%= result1[i].score %></p></td>
                                 <td width = "30%"><p id="total"><%= result1[i].complaint_counter %></p></td>
                             </tr>
-                        <% } %>
+                        <% } 
+                        }   %>
                         </table>        
                 </div>
             </div>
