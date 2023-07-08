@@ -19,10 +19,7 @@ The Grievance Portal is a web application that provides a platform for users to 
 -Database: MySQL
 
 ## Modules required to run this application
-npm i express
-npm i path 
-npm i ejs
-npm i mysql2
+npm install
 
 ## Installation Procedure
 
